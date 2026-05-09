@@ -1,7 +1,7 @@
 const { Telegraf, Markup } = require('telegraf');
 const http = require('http');
 
-// KEEP-ALIVE SERVER
+// 1. KEEP-ALIVE SERVER (Prevents Render from sleeping)
 http.createServer((req, res) => {
   res.write('LAZZ TECH MAINFRAME: ACTIVE');
   res.end();
@@ -9,78 +9,121 @@ http.createServer((req, res) => {
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-// HELPER: Main Menu Markup
+// 2. CONFIGURATION & DATABASE (Temporary Set for this session)
+const ADMIN_ID = 7721569968; // Your verified ID
+const WHATSAPP = "254106527992";
+const WEB = "https://lazztech.github.io";
+let users = new Set(); // Tracks unique users for broadcasting
+
+// 3. HELPER: MarkdownV2 Escaper (Prevents Crashes)
+const escape = (text) => {
+  return text.toString().replace(/[_*[\]()~`>#+-=|{}.!]/g, '\\$&');
+};
+
+const footer = `\n\n\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n*⚡ LAZZ TECH SOLUTIONS \\| Secured \\& Optimized*`;
+
+// 4. MIDDLEWARE: User Analytics
+bot.use((ctx, next) => {
+  if (ctx.from) {
+    users.add(ctx.from.id);
+    console.log(`[ACCESS] ${ctx.from.first_name} (ID: ${ctx.from.id})`);
+  }
+  return next();
+});
+
+// 5. ADMIN COMMAND: Broadcast to all users
+bot.command('broadcast', async (ctx) => {
+  if (ctx.from.id !== ADMIN_ID) return ctx.reply('⚠️ ACCESS DENIED: UNAUTHORIZED USER.');
+  const msg = ctx.message.text.split('/broadcast ')[1];
+  if (!msg) return ctx.reply('Usage: /broadcast [Your Message]');
+  
+  let count = 0;
+  users.forEach(id => {
+    bot.telegram.sendMessage(id, `📢 *LAZZ TECH ANNOUNCEMENT:*\n\n${msg}`, { parse_mode: 'Markdown' })
+      .then(() => count++)
+      .catch(() => {});
+  });
+  ctx.reply(`Broadcast sequence initiated. Reach: ${users.size} nodes.`);
+});
+
+// 6. MAIN MENU KEYBOARD
 const mainMenu = () => {
   return Markup.inlineKeyboard([
     [Markup.button.callback('🚀 SERVICES', 'services'), Markup.button.callback('📂 PROJECTS', 'projects')],
-    [Markup.button.callback('🛠 TECH STACK', 'stack'), Markup.button.url('⚡ WHATSAPP COMMS', 'https://wa.me/254106527992')],
-    [Markup.button.url('🌐 WEB PORTFOLIO', 'https://lazztech.github.io')]
+    [Markup.button.callback('🛠 TECH STACK', 'stack'), Markup.button.url('⚡ WHATSAPP COMMS', `https://wa.me/${WHATSAPP}`)],
+    [Markup.button.url('🌐 WEB PORTFOLIO', WEB)]
   ]);
 };
 
-// WELCOME: Personalized Greeting
+// 7. START: Neural Interface Initialization
 bot.start((ctx) => {
-  const name = (ctx.from.first_name || 'Agent').replace(/[_*[\]()~`>#+-=|{}.!]/g, '\\$&');
+  const name = escape(ctx.from.first_name || 'Agent');
   const welcomeText = 
-    `*⚡ LAZZ TECH NEURAL INTERFACE v4\\.0* ⚡\n` +
+    `*⚡ LAZZ TECH NEURAL INTERFACE v5\\.0* ⚡\n` +
     `\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\n` +
-    `*USER:* ${name} \\| *STATUS:* ONLINE\n` +
-    `*ENGINEERING:* Networking \\| Dev \\| Infrastructure\n` +
-    `\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\n\n` +
-    `Welcome to the hub\\. Select an operation below to initialize my services\\:`;
+    `*SCANNING USER\\.\\.\\.* \n` +
+    `👤 *IDENTITY:* ${name}\n` +
+    `🆔 *USER ID:* \`${ctx.from.id}\` \n` +
+    `⏰ *STATUS:* ACTIVE NODE\n` +
+    `\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\n\n` +
+    `Welcome to the mainframe\\. Select an operation to begin\\.`;
 
-  ctx.replyWithMarkdownV2(welcomeText, mainMenu());
+  ctx.replyWithMarkdownV2(welcomeText + footer, mainMenu());
 });
 
-// SERVICES SECTION
+// 8. SERVICES & ORDER FLOW
 bot.action('services', (ctx) => {
   ctx.editMessageText(
-    `*🛡️ MASTER SERVICES:* \n` +
+    `*🛡️ MASTER SERVICES ARCHIVE:* \n` +
     `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
-    `• *VPN Infrastructure:* High\\-speed VLESS/Reality/WireGuard configs\\.\n` +
-    `• *VPS \\& Panels:* Linux server hardening \\& traffic management panels\\.\n` +
-    `• *App/Web Dev:* React Native apps \\& custom web solutions\\.\n\n` +
-    `*Ready to proceed?* Click the "WHATSAPP COMMS" button in the menu to finalize your order\\.`,
-    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start')]]) }
-  ).catch(err => console.log(err));
+    `• *VPN:* High\\-speed VLESS/Reality tunneling\\.\n` +
+    `• *VPS:* Server management \\& custom panels\\.\n` +
+    `• *DEV:* Custom Web \\& Mobile App engineering\\.\n\n` +
+    `Select "ORDER NOW" to initiate a service request\\.`,
+    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([
+      [Markup.button.callback('🛒 ORDER NOW', 'order_start')],
+      [Markup.button.callback('🔙 BACK', 'start_menu')]
+    ])}
+  ).catch(() => {});
 });
 
-// PROJECTS SECTION
+bot.action('order_start', (ctx) => {
+  ctx.editMessageText(`📦 *SELECT SERVICE TYPE:*`, {
+    parse_mode: 'MarkdownV2',
+    ...Markup.inlineKeyboard([
+      [Markup.button.callback('Premium VPN Config', 'order_vpn'), Markup.button.callback('VPS Management', 'order_vps')],
+      [Markup.button.callback('🔙 BACK', 'services')]
+    ])
+  });
+});
+
+bot.action(/order_/, (ctx) => {
+  const type = ctx.match.input.split('_')[1].toUpperCase();
+  // Notify Admin (You)
+  bot.telegram.sendMessage(ADMIN_ID, `🔔 *NEW ORDER INITIATED*\nUser: ${ctx.from.first_name}\nType: ${type}\nID: ${ctx.from.id}`);
+  
+  ctx.reply(`✅ *ORDER LOGGED:* I have notified the Master regarding your ${type} request\\. Redirecting to WhatsApp for finalization\\.\\.\\.`)
+     .then(() => {
+        ctx.reply(`Click here to finish: https://wa.me/${WHATSAPP}?text=I%20want%20to%20order%20${type}`);
+     });
+});
+
+// 9. OTHER SECTIONS
 bot.action('projects', (ctx) => {
-  ctx.editMessageText(
-    `*📂 PROJECT ARCHIVES:* \n` +
-    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
-    `1\\. *Paulah App:* Cloud\\-based photo storage \\(React Native/Firebase\\)\\.\n` +
-    `2\\. *WhatsApp Brain:* Autonomous bot suite \\(Node\\.js/MongoDB\\)\\.\n` +
-    `3\\. *Global Nodes:* VLESS/Reality tunneling architecture\\.\n\n` +
-    `*Status:* All projects currently active and maintained\\.`,
-    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start')]]) }
-  ).catch(err => console.log(err));
+  ctx.editMessageText(`*📂 PROJECT ARCHIVES:* \n\n1\\. *Paulah App:* Cloud storage\\.\n2\\. *WhatsApp Brain:* Autonomous bot suite\\.\n3\\. *Global Nodes:* Tunneling infrastructure\\.` + footer,
+    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start_menu')]]) }
+  ).catch(() => {});
 });
 
-// TECH STACK
 bot.action('stack', (ctx) => {
-  ctx.editMessageText(
-    `*🛠 TECH MASTER STACK:* \n` +
-    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
-    `*Languages:* JavaScript \\(Node\\.js\\), Bash\\.\n` +
-    `*Platforms:* Linux, Render, GitHub Pages, Termux\\.\n` +
-    `*Databases:* MongoDB, Firebase\\.\n` +
-    `*Focus:* Network Security \\& High\\-Performance Automation\\.`,
-    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start')]]) }
-  ).catch(err => console.log(err));
+  ctx.editMessageText(`*🛠 TECH MASTER STACK:* \n\nNode\\.js \\| Linux \\| VLESS \\| Reality \\| MongoDB \\| Firebase \\| React Native` + footer,
+    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start_menu')]]) }
+  ).catch(() => {});
 });
 
-// BACK TO START
-bot.action('start', (ctx) => {
-  const name = (ctx.from.first_name || 'Agent').replace(/[_*[\]()~`>#+-=|{}.!]/g, '\\$&');
-  ctx.editMessageText(
-    `*⚡ LAZZ TECH NEURAL INTERFACE v4\\.0* ⚡\n` +
-    `*USER:* ${name} \\| *STATUS:* ONLINE\n` +
-    `Welcome back\\. Select an operation below:`,
-    { parse_mode: 'MarkdownV2', ...mainMenu() }
-  ).catch(err => console.log(err));
+bot.action('start_menu', (ctx) => {
+  ctx.editMessageText(`*⚡ LAZZ TECH MAIN INTERFACE* \nSelect an operation:`, { parse_mode: 'MarkdownV2', ...mainMenu() }).catch(() => {});
 });
 
 bot.launch();
-console.log("Elite Bot is Live and Escaped...");
+console.log("Elite Lazz Tech Bot: Operational.");
