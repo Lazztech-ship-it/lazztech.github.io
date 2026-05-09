@@ -5,58 +5,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lazz Tech | Engineering the Invisible</title>
     <style>
-        :root { --primary: #00d4ff; --bg: #050b14; --card: #0f172a; }
-        body { background-color: var(--bg); color: #e2e8f0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; }
-        
-        /* Background Tech Pattern */
-        body::before { content: ""; position: absolute; width: 100%; height: 100%; background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px); background-size: 30px 30px; opacity: 0.1; z-index: -1; }
+        :root {
+            --primary: #00d4ff;
+            --secondary: #00ff41;
+            --bg: #050b14;
+            --card: rgba(15, 23, 42, 0.8);
+            --text: #e2e8f0;
+        }
 
-        .pro-container { width: 90%; max-width: 450px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 24px; padding: 40px 20px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        
-        .logo-area { position: relative; width: 100px; height: 100px; margin: 0 auto 20px; border-radius: 50%; border: 2px solid var(--primary); padding: 5px; box-shadow: 0 0 15px var(--primary); }
-        .logo-area img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 212, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 255, 65, 0.1) 0px, transparent 50%);
+            color: var(--text);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
 
-        h1 { font-size: 28px; margin: 10px 0; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { font-size: 14px; color: var(--primary); font-weight: bold; margin-bottom: 25px; opacity: 0.8; }
+        .pro-container {
+            width: 90%;
+            max-width: 450px;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
 
-        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
-        .service-tag { background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.3); padding: 8px; border-radius: 8px; font-size: 12px; font-weight: 500; transition: 0.3s; }
-        .service-tag:hover { background: var(--primary); color: #000; transform: translateY(-3px); }
+        .logo-area img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            padding: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
 
-        .links { display: flex; flex-direction: column; gap: 15px; }
-        .btn { text-decoration: none; color: white; padding: 15px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden; background: rgba(255,255,255,0.05); }
-        .btn:hover { background: rgba(255,255,255,0.1); border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); transform: scale(1.02); }
+        h1 {
+            font-size: 2rem;
+            margin: 0;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        .whatsapp { border-left: 4px solid #25d366; }
-        .telegram { border-left: 4px solid #0088cc; }
-        .github { border-left: 4px solid #fff; }
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
 
-        .footer { margin-top: 30px; font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 30px 0;
+        }
+
+        .service-tag {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .service-tag:hover {
+            background: var(--primary);
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn:hover {
+            transform: scale(1.02);
+            filter: brightness(1.2);
+        }
+
+        .whatsapp { background: #25d366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); }
+        .telegram { background: #0088cc; box-shadow: 0 4px 15px rgba(0, 136, 204, 0.2); }
+        .github { background: #333; }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 10px;
+            color: #64748b;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
-    <div class="pro-container">
-        <div class="logo-area">
-            <img src="logo.png" alt="Lazz Tech">
-        </div>
-        
-        <h1>Lazz Tech</h1>
-        <div class="subtitle">Advanced Systems Engineer</div>
 
-        <div class="services-grid">
-            <div class="service-tag">VLESS / REALITY</div>
-            <div class="service-tag">BOT DEPLOYMENT</div>
-            <div class="service-tag">VPS MANAGEMENT</div>
-            <div class="service-tag">NETWORK SECURITY</div>
-        </div>
-
-        <div class="links">
-            <a href="https://wa.me/254106527992" class="btn whatsapp">CONNECT VIA WHATSAPP</a>
-            <a href="https://t.me/@Lazz1235" class="btn telegram">TELEGRAM CHANNEL</a>
-            <a href="https://github.com/harveycayle-droid" class="btn github">SOURCE CODE REPOSITORY</a>
-        </div>
-
-        <div class="footer">Built by Lazz Tech • Terminal Ready</div>
+<div class="pro-container">
+    <div class="logo-area">
+        <!-- Ensure logo.png is in your github repo -->
+        <img src="logo.png" alt="Lazz Tech">
     </div>
+
+    <h1>Lazz Tech</h1>
+    <div class="subtitle">Advanced Systems Engineer</div>
+
+    <div class="services-grid">
+        <div class="service-tag">VLESS / REALITY</div>
+        <div class="service-tag">BOT DEPLOYMENT</div>
+        <div class="service-tag">VPS MANAGEMENT</div>
+        <div class="service-tag">NETWORK SECURITY</div>
+    </div>
+
+    <div class="links">
+        <a href="https://wa.me/254106527992" class="btn whatsapp">CONNECT VIA WHATSAPP</a>
+        <a href="https://t.me/@Lazz1235" class="btn telegram">JOIN TELEGRAM CHANNEL</a>
+        <a href="https://github.com/lazztech-ship-it" class="btn github">VIEW SOURCE CODE</a>
+    </div>
+
+    <div class="footer">
+        BUILT BY LAZZ TECH • SYSTEM VERSION 2.0.4
+    </div>
+</div>
+
 </body>
 </html>
