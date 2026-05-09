@@ -1,7 +1,7 @@
 const { Telegraf, Markup } = require('telegraf');
 const http = require('http');
 
-// KEEP-ALIVE SERVER (For Render Free Tier)
+// KEEP-ALIVE SERVER (For Render)
 http.createServer((req, res) => {
   res.write('LAZZ TECH MAINFRAME: ACTIVE');
   res.end();
@@ -9,65 +9,78 @@ http.createServer((req, res) => {
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-// HELPER: Get current time in EAT (Kenya Time)
-const getFormattedTime = () => {
-  return new Date().toLocaleString("en-GB", { timeZone: "Africa/Nairobi" });
+// HELPER: Main Menu Markup
+const mainMenu = () => {
+  return Markup.inlineKeyboard([
+    [Markup.button.callback('🚀 SERVICES', 'services'), Markup.button.callback('📂 PROJECTS', 'projects')],
+    [Markup.button.callback('🛠 TECH STACK', 'stack'), Markup.button.url('⚡ WHATSAPP COMMS', 'https://wa.me/254106527992')],
+    [Markup.button.url('🌐 WEB PORTFOLIO', 'https://lazztech.github.io')]
+  ]);
 };
 
+// WELCOME: Personalized Greeting
 bot.start((ctx) => {
-  const name = ctx.from.first_name || 'Unknown_Entity';
-  const uid = ctx.from.id;
-  const time = getFormattedTime();
-
-  const welcome = 
-    `*⚡ LAZZ TECH NEURAL INTERFACE V3\\.0* ⚡\n` +
+  const name = ctx.from.first_name || 'Agent';
+  const welcomeText = 
+    `*⚡ LAZZ TECH NEURAL INTERFACE v4\\.0* ⚡\n` +
     `\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\n` +
-    `*SCANNING USER\\.\\.\\.* \n` +
-    `👤 *IDENTITY:* ${name}\n` +
-    `🆔 *USER ID:* \`${uid}\` \n` +
-    `⏰ *TIMESTAMP:* ${time}\n` +
-    `📍 *LOCATION:* KENYA NODE \\(ACTIVE\\)\n` +
+    `*USER:* [${name}](tg://user?id=${ctx.from.id}) | *STATUS:* ONLINE\n` +
+    `*ENGINEERING:* Networking \\| Dev \\| Infrastructure\n` +
     `\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\n\n` +
-    `*ACCESS GRANTED\\.* Greetings, agent\\. I am the automated intelligence for *Lazz Tech Innovative Solutions*\\. \n\n` +
-    `How shall we optimize your network or build your next infrastructure today?`;
+    `Welcome to the hub\\. Select an operation below to initialize my services:`;
 
-  ctx.replyWithMarkdownV2(
-    welcome,
-    Markup.inlineKeyboard([
-      [Markup.button.callback('📂 PROJECT ARCHIVES', 'projects')],
-      [Markup.button.callback('🛠 CORE TECH STACK', 'stack')],
-      [Markup.button.url('🌐 WEBFRAME PORTFOLIO', 'https://lazztech.github.io')],
-      [Markup.button.url('🛡️ SECURE COMMS', 'https://t.me/Lazz1235')]
-    ])
+  ctx.replyWithMarkdownV2(welcomeText, mainMenu());
+});
+
+// SERVICES SECTION
+bot.action('services', (ctx) => {
+  ctx.editMessageText(
+    `*🛡️ MASTER SERVICES:* \n` +
+    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
+    `• *VPN Infrastructure:* High-speed VLESS/Reality/WireGuard configs\\.\n` +
+    `• *VPS & Panels:* Linux server hardening & traffic management panels\\.\n` +
+    `• *App/Web Dev:* React Native apps & custom web solutions\\.\n\n` +
+    `*Ready to proceed?* Click the "WHATSAPP COMMS" button in the menu to finalize your order\\.`,
+    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start')]]) }
   );
 });
 
-// PROJECT LAB SECTION
+// PROJECTS SECTION
 bot.action('projects', (ctx) => {
-  const projects = 
-    `*📂 PROJECT LAB ANALYSIS:* \n` +
-    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
-    `🚀 *Paulah App:* High\\-security mobile storage built with React Native & Firebase Cloud Architecture\\.\n\n` +
-    `🤖 *WhatsApp Cloud Brain:* Autonomous bot system running Node\\.js and MongoDB for real\\-time data sync\\.\n\n` +
-    `🛰️ *Tunneling Architect:* Advanced deployment of VLESS, Reality, and WireGuard protocol layers on global VPS nodes\\.`;
-  
-  ctx.answerCbQuery();
-  ctx.replyWithMarkdownV2(projects);
+  ctx.editMessageText(
+    `*📂 PROJECT ARCHIVES:* \n` +
+    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
+    `1\\. *Paulah App:* Cloud-based photo storage (React Native/Firebase)\\.\n` +
+    `2\\. *WhatsApp Brain:* Autonomous bot suite (Node\\.js/MongoDB)\\.\n` +
+    `3\\. *Global Nodes:* VLESS/Reality tunneling architecture\\.\n\n` +
+    `*Status:* All projects currently active and maintained\\.`,
+    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start')]]) }
+  );
 });
 
-// TECH STACK SECTION
+// TECH STACK
 bot.action('stack', (ctx) => {
-  const stack = 
-    `*🛠 TECH MASTER CAPABILITIES:* \n` +
-    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
-    `• *NETWORKING:* VLESS, VMess, Reality, SSH Tunneling, ISP Bug Hosting\\.\n` +
-    `• *DEVELOPMENT:* Node\\.js, JavaScript, React Native, Bash Scripting\\.\n` +
-    `• *DATABASE:* MongoDB, Firebase Cloud Storage\\.\n` +
-    `• *PLATFORMS:* Linux VPS \\(Ubuntu/Debian\\), Termux, GitHub Pages\\.`;
+  ctx.editMessageText(
+    `*🛠 TECH MASTER STACK:* \n` +
+    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
+    `*Languages:* JavaScript (Node\\.js), Bash\\.\n` +
+    `*Platforms:* Linux, Render, GitHub Pages, Termux\\.\n` +
+    `*Databases:* MongoDB, Firebase\\.\n` +
+    `*Focus:* Network Security & High-Performance Automation\\.`,
+    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start')]]) }
+  );
+});
 
-  ctx.answerCbQuery();
-  ctx.replyWithMarkdownV2(stack);
+// BACK TO START
+bot.action('start', (ctx) => {
+  const name = ctx.from.first_name || 'Agent';
+  ctx.editMessageText(
+    `*⚡ LAZZ TECH NEURAL INTERFACE v4\\.0* ⚡\n` +
+    `*USER:* [${name}](tg://user?id=${ctx.from.id}) | *STATUS:* ONLINE\n` +
+    `Welcome back\\. Select an operation below:`,
+    { parse_mode: 'MarkdownV2', ...mainMenu() }
+  );
 });
 
 bot.launch();
-console.log("Elite Lazz Tech Bot is Online...");
+     
