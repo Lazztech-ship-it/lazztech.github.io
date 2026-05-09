@@ -1,44 +1,73 @@
 const { Telegraf, Markup } = require('telegraf');
 const http = require('http');
 
-// 1. CREATE THE WEB SERVER (To stay on Render's free tier)
+// KEEP-ALIVE SERVER (For Render Free Tier)
 http.createServer((req, res) => {
-  res.write('Lazz Tech Bot is Online');
+  res.write('LAZZ TECH MAINFRAME: ACTIVE');
   res.end();
 }).listen(process.env.PORT || 3000);
 
-// 2. INITIALIZE THE BOT (This line fixes your error!)
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-// 3. THE WELCOME MESSAGE
+// HELPER: Get current time in EAT (Kenya Time)
+const getFormattedTime = () => {
+  return new Date().toLocaleString("en-GB", { timeZone: "Africa/Nairobi" });
+};
+
 bot.start((ctx) => {
-  const welcomeText = 
-    `*SYSTEM ONLINE: LAZZ TECH HUB* 🌐\n\n` +
-    `Greetings, user\\. I am the automated interface for *Lazz Tech Innovative Solutions*\\.\n\n` +
-    `*Current Capabilities:* \n` +
-    `• 🛰️ High\\-Speed Tunneling \\(VLESS/Reality/SSH\\)\n` +
-    `• 🤖 Custom Bot Development & Deployment\n` +
-    `• 🛡️ Network Security & VPS Management\n\n` +
-    `Select a command below to initialize\\:`;
+  const name = ctx.from.first_name || 'Unknown_Entity';
+  const uid = ctx.from.id;
+  const time = getFormattedTime();
+
+  const welcome = 
+    `*⚡ LAZZ TECH NEURAL INTERFACE V3\\.0* ⚡\n` +
+    `\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\n` +
+    `*SCANNING USER\\.\\.\\.* \n` +
+    `👤 *IDENTITY:* ${name}\n` +
+    `🆔 *USER ID:* \`${uid}\` \n` +
+    `⏰ *TIMESTAMP:* ${time}\n` +
+    `📍 *LOCATION:* KENYA NODE \\(ACTIVE\\)\n` +
+    `\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\n\n` +
+    `*ACCESS GRANTED\\.* Greetings, agent\\. I am the automated intelligence for *Lazz Tech Innovative Solutions*\\. \n\n` +
+    `How shall we optimize your network or build your next infrastructure today?`;
 
   ctx.replyWithMarkdownV2(
-    welcomeText,
+    welcome,
     Markup.inlineKeyboard([
-      [Markup.button.callback('📂 Project Lab', 'projects'), Markup.button.callback('🛠 Tech Stack', 'stack')],
-      [Markup.button.url('🌐 Portfolio Website', 'https://lazztech.github.io')],
-      [Markup.button.url('💬 Contact Master', 'https://t.me/Lazz1235')]
+      [Markup.button.callback('📂 PROJECT ARCHIVES', 'projects')],
+      [Markup.button.callback('🛠 CORE TECH STACK', 'stack')],
+      [Markup.button.url('🌐 WEBFRAME PORTFOLIO', 'https://lazztech.github.io')],
+      [Markup.button.url('🛡️ SECURE COMMS', 'https://t.me/Lazz1235')]
     ])
   );
 });
 
-// 4. BUTTON LISTENERS
-bot.action('stack', (ctx) => {
-  ctx.reply('⚡ TECH STACK:\n• Networking: VLESS, VMess, Reality\n• Dev: Node.js, MongoDB, React Native\n• OS: Linux (Ubuntu/Debian)');
+// PROJECT LAB SECTION
+bot.action('projects', (ctx) => {
+  const projects = 
+    `*📂 PROJECT LAB ANALYSIS:* \n` +
+    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
+    `🚀 *Paulah App:* High\\-security mobile storage built with React Native & Firebase Cloud Architecture\\.\n\n` +
+    `🤖 *WhatsApp Cloud Brain:* Autonomous bot system running Node\\.js and MongoDB for real\\-time data sync\\.\n\n` +
+    `🛰️ *Tunneling Architect:* Advanced deployment of VLESS, Reality, and WireGuard protocol layers on global VPS nodes\\.`;
+  
+  ctx.answerCbQuery();
+  ctx.replyWithMarkdownV2(projects);
 });
 
-bot.action('projects', (ctx) => {
-  ctx.reply('📂 PROJECT LAB:\n• Paulah App (Mobile Photo Storage)\n• WhatsApp Cloud Bot\n• WireGuard Tunneling Servers');
+// TECH STACK SECTION
+bot.action('stack', (ctx) => {
+  const stack = 
+    `*🛠 TECH MASTER CAPABILITIES:* \n` +
+    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
+    `• *NETWORKING:* VLESS, VMess, Reality, SSH Tunneling, ISP Bug Hosting\\.\n` +
+    `• *DEVELOPMENT:* Node\\.js, JavaScript, React Native, Bash Scripting\\.\n` +
+    `• *DATABASE:* MongoDB, Firebase Cloud Storage\\.\n` +
+    `• *PLATFORMS:* Linux VPS \\(Ubuntu/Debian\\), Termux, GitHub Pages\\.`;
+
+  ctx.answerCbQuery();
+  ctx.replyWithMarkdownV2(stack);
 });
 
 bot.launch();
-console.log("Server and Bot are running...");
+console.log("Elite Lazz Tech Bot is Online...");
