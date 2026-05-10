@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAZZ TECH | SECURITY PROTOCOLS</title>
+    <style>
+        :root {
+            --security-red: #ff003c;
+            --ghost-white: #f8f9fa;
+            --bg-black: #080808;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--ghost-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .header-banner {
+            border: 2px solid var(--security-red);
+            padding: 20px;
+            background: rgba(255, 0, 60, 0.05);
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .header-banner h1 {
+            color: var(--security-red);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 0;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .defense-card {
+            background: #111;
+            border-top: 3px solid var(--security-red);
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .defense-card h2 {
+            font-size: 1.3rem;
+            margin-top: 0;
+            color: var(--security-red);
+        }
+
+        .root-terminal {
+            grid-column: span 2;
+            background: #000;
+            border: 1px solid #333;
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ff41;
+            margin-top: 20px;
+        }
+
+        .tech-pill {
+            display: inline-block;
+            background: var(--security-red);
+            color: white;
+            padding: 3px 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 50px;
+            color: var(--security-red);
+            text-decoration: none;
+            border: 1px solid var(--security-red);
+            padding: 12px 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background: var(--security-red);
+            color: white;
+            box-shadow: 0 0 20px var(--security-red);
+        }
+
+        b { color: var(--security-red); }
+        ul { list-style: none; padding: 0; }
+        li { padding: 8px 0; border-bottom: 1px solid #222; }
+    </style>
+</head>
+<body>
+
+    <div class="header-banner">
+        <p style="font-size: 0.8rem; letter-spacing: 2px;">ENCRYPTION LEVEL: AES-256-BIT // SECURE ARCHIVE</p>
+        <h1>04. SECURITY & SYSTEM DEFENSE</h1>
+    </div>
+
+    <div class="security-grid">
+        <div class="defense-card">
+            <span class="tech-pill">MOBILE APP DEV</span>
+            <h2>Paulah App Security</h2>
+            <p>Developing secure mobile environments using <b>React Native</b> and <b>Firebase</b> integration.</p>
+            <ul>
+                <li><b>End-to-End Encryption:</b> Secure asset storage for user data and media.</li>
+                <li><b>SDK Hardening:</b> Mitigating vulnerabilities in third-party library dependencies.</li>
+                <li><b>Auth Protocols:</b> Implementing secure JWT and Firebase-based authentication flows.</li>
+            </ul>
+        </div>
+
+        <div class="defense-card">
+            <span class="tech-pill">SYSTEM ROOT</span>
+            <h2>Advanced Phone Diagnostics</h2>
+            <p>In-depth mobile OS customization and system file manipulation.</p>
+            <ul>
+                <li><b>USSD Diagnostics:</b> Leveraging <b>*#*#4636#*#*</b> for advanced network testing.</li>
+                <li><b>Root Access Management:</b> System file modification for camera and performance optimization.</li>
+                <li><b>Hardware Interfacing:</b> Troubleshooting outdoor units (ODU) and 5G router security.</li>
+            </ul>
+        </div>
+
+        <div class="root-terminal">
+            <div>[SEC_AUDIT] Initializing Paulah App environment check...</div>
+            <div>[SEC_AUDIT] Scanning for unauthorized API calls... <b>CLEAN</b></div>
+            <div>[SEC_AUDIT] Checking M-KOPA X2 Root status... <b>AUTHORIZED</b></div>
+            <div>[SEC_AUDIT] Firewall active. Intrusions: 0.</div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-link">RETURN TO HUB</a>
+
+</body>
+</html>
+
