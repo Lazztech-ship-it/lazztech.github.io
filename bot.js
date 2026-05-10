@@ -35,6 +35,7 @@ const hubMenu = Markup.inlineKeyboard([
     [Markup.button.callback('📱 APP DEVELOPMENT', 'nav_dev'), Markup.button.callback('📂 PROJECTS', 'nav_projects')],
     [Markup.button.callback('🛡️ SECURITY MATRIX', 'nav_security')], 
     [Markup.button.callback('👨‍💻 THE MASTER', 'nav_about'), Markup.button.callback('✍️ FEEDBACK', 'nav_feedback')]
+  
 ]);
 
 bot.start((ctx) => {
@@ -54,6 +55,7 @@ bot.action('nav_vpn', (ctx) => execCommand(ctx, 'TUNNEL_DATA', services.vpn));
 bot.action('nav_vps', (ctx) => execCommand(ctx, 'VPS_TERMINAL', services.vps));
 bot.action('nav_dev', (ctx) => execCommand(ctx, 'DEV_LOGS', services.dev));
 bot.action('nav_security', (ctx) => execCommand(ctx, 'SEC_MATRIX_LOAD', services.security));
+bot.action('nav_about', (ctx) => execCommand(ctx, 'MASTER_PROFILE_LOAD', services.master));
 
 bot.action('nav_projects', async (ctx) => {
     await ctx.reply(`> _FETCHING_ARCHIVES..._`);
