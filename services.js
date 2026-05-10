@@ -64,6 +64,12 @@ Expert diagnostics for Android devices and network infrastructure. We provide de
         pricing: `
 ◈ DIAGNOSTICS ........  Ksh 200
 ◈ ROOT/RECOVERY ......  Negotiable`
-    }
+    },
+        master: {
+        title: "👨‍💻 THE MASTER | LAZZ TECH",
+        specs: "• Role: Advanced Systems Engineer\n• Focus: Network Security & App Dev\n• Region: East Africa / Kenya\n• Experience: High-Level Infrastructure",
+        details: "Lazz is the lead architect of the Paulah App and the Lazz Tech infrastructure. Expert in VPS hardening and stealth tunneling protocols.",
+        pricing: "◈ CONSULTATION: Free | ◈ SPECIAL PROJECTS: Negotiable"
+        }
 };
 
