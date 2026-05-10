@@ -1,129 +1,206 @@
-const { Telegraf, Markup } = require('telegraf');
-const http = require('http');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazz Tech | Advanced Systems Engineer</title>
+    <style>
+        :root {
+            --primary-blue: #00d2ff;
+            --bg-dark: #050a12;
+            --card-bg: #0d1624;
+            --text-main: #ffffff;
+            --text-dim: #a0aec0;
+        }
 
-// 1. KEEP-ALIVE SERVER (Prevents Render from sleeping)
-http.createServer((req, res) => {
-  res.write('LAZZ TECH MAINFRAME: ACTIVE');
-  res.end();
-}).listen(process.env.PORT || 3000);
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 210, 255, 0.1);
+        }
 
-// 2. CONFIGURATION & DATABASE (Temporary Set for this session)
-const ADMIN_ID = 7721569968; // Your verified ID
-const WHATSAPP = "254106527992";
-const WEB = "https://lazztech.github.io";
-let users = new Set(); // Tracks unique users for broadcasting
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-blue);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+            margin-bottom: 20px;
+        }
 
-// 3. HELPER: MarkdownV2 Escaper (Prevents Crashes)
-const escape = (text) => {
-  return text.toString().replace(/[_*[\]()~`>#+-=|{}.!]/g, '\\$&');
-};
+        h1 { margin: 10px 0; font-size: 2rem; letter-spacing: 1px; }
+        .subtitle { color: var(--primary-blue); font-weight: bold; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 30px; text-transform: uppercase; }
 
-const footer = `\n\n\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n*⚡ LAZZ TECH SOLUTIONS \\| Secured \\& Optimized*`;
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
 
-// 4. MIDDLEWARE: User Analytics
-bot.use((ctx, next) => {
-  if (ctx.from) {
-    users.add(ctx.from.id);
-    console.log(`[ACCESS] ${ctx.from.first_name} (ID: ${ctx.from.id})`);
-  }
-  return next();
-});
+        .tech-btn {
+            background: rgba(0, 210, 255, 0.05);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            color: var(--primary-blue);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 0.75rem;
+        }
 
-// 5. ADMIN COMMAND: Broadcast to all users
-bot.command('broadcast', async (ctx) => {
-  if (ctx.from.id !== ADMIN_ID) return ctx.reply('⚠️ ACCESS DENIED: UNAUTHORIZED USER.');
-  const msg = ctx.message.text.split('/broadcast ')[1];
-  if (!msg) return ctx.reply('Usage: /broadcast [Your Message]');
+        .tech-btn:hover {
+            background: var(--primary-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 15px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .whatsapp { background-color: #25D366; }
+        .telegram { background-color: #0088cc; }
+        .source { background-color: #333; }
+
+        .action-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* MODAL STYLES */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay-content {
+            background: #0a1526;
+            padding: 30px;
+            border: 1px solid var(--primary-blue);
+            border-radius: 15px;
+            width: 85%;
+            max-width: 400px;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 28px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        .modal-body { text-align: left; font-size: 0.9rem; line-height: 1.6; color: var(--text-dim); }
+        .modal-body b { color: var(--primary-blue); }
+        hr { border: 0.5px solid rgba(0, 210, 255, 0.2); margin: 15px 0; }
+
+        .footer { margin-top: 30px; font-size: 0.7rem; color: #555; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://raw.githubusercontent.com/lazztech-ship-it/lazztech.github.io/main/logo.png" alt="Lazz Tech Logo" class="profile-img">
+    <h1>Lazz Tech</h1>
+    <div class="subtitle">Advanced Systems Engineer</div>
+
+    <div class="grid">
+        <button class="tech-btn" onclick="showDetails('vless')">VLESS / REALITY</button>
+        <button class="tech-btn" onclick="showDetails('bot')">BOT DEPLOYMENT</button>
+        <button class="tech-btn" onclick="showDetails('vps')">VPS MANAGEMENT</button>
+        <button class="tech-btn" onclick="showDetails('security')">NETWORK SECURITY</button>
+    </div>
+
+    <button class="action-btn whatsapp" onclick="window.location.href='https://wa.me/254106527992'">CONNECT VIA WHATSAPP</button>
+    <button class="action-btn telegram" onclick="window.location.href='https://t.me/Lazz@1235'">JOIN TELEGRAM CHANNEL</button>
+    <button class="action-btn source" onclick="window.location.href='https://github.com/lazztech-ship-it'">VIEW SOURCE CODE</button>
+
+    <div class="footer">BUILT BY LAZZ TECH • SYSTEM VERSION 2.0.5</div>
+</div>
+
+<div id="detail-overlay" class="overlay">
+    <div class="overlay-content">
+        <span class="close-btn" onclick="closeDetails()">&times;</span>
+        <h2 id="detail-title" style="color: var(--primary-blue);">Title</h2>
+        <hr>
+        <div id="detail-body" class="modal-body">
+            </div>
+    </div>
+</div>
+
+<script>
+    const projectData = {
+        'vless': {
+            title: "Tunneling Architecture",
+            content: "Expertise in deploying high-performance tunneling protocols. <b>Projects:</b> Optimized VLESS and Reality protocols with XTLS-core for anti-detection and ultra-low latency. Skilled in scanning zero-rated SNI hosts for regional ISP bypassing."
+        },
+        'bot': {
+            title: "Bot Development",
+            content: "Full-stack automation solutions. <b>Major Project:</b> Built a cloud-hosted WhatsApp bot system using Node.js and MongoDB. Features include automated response systems and multi-device cloud synchronization."
+        },
+        'vps': {
+            title: "Infrastructure Management",
+            content: "Managing robust server environments. <b>System:</b> Administration of Linux-based VPS (Ubuntu/Debian) via Termux and SSH. Experience with DigitalOcean and IONOS for hosting high-traffic management panels like 3x-ui."
+        },
+        'security': {
+            title: "Network & App Security",
+            content: "Systems engineering and mobile security. <b>Featured Project:</b> The 'Paulah App'—a secure mobile solution built with React Native and Expo. Expertise in network packet analysis and firewall configuration."
+        }
+    };
+
+    function showDetails(key) {
+        document.getElementById('detail-title').innerText = projectData[key].title;
+        document.getElementById('detail-body').innerHTML = projectData[key].content;
+        document.getElementById('detail-overlay').style.display = 'flex';
+    }
+
+    function closeDetails() {
+        document.getElementById('detail-overlay').style.display = 'none';
+    }
+
+    // Close modal if clicking outside the box
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('detail-overlay')) {
+            closeDetails();
+        }
+    }
+</script>
+
+</body>
+</html>
   
-  let count = 0;
-  users.forEach(id => {
-    bot.telegram.sendMessage(id, `📢 *LAZZ TECH ANNOUNCEMENT:*\n\n${msg}`, { parse_mode: 'Markdown' })
-      .then(() => count++)
-      .catch(() => {});
-  });
-  ctx.reply(`Broadcast sequence initiated. Reach: ${users.size} nodes.`);
-});
-
-// 6. MAIN MENU KEYBOARD
-const mainMenu = () => {
-  return Markup.inlineKeyboard([
-    [Markup.button.callback('🚀 SERVICES', 'services'), Markup.button.callback('📂 PROJECTS', 'projects')],
-    [Markup.button.callback('🛠 TECH STACK', 'stack'), Markup.button.url('⚡ WHATSAPP COMMS', `https://wa.me/${WHATSAPP}`)],
-    [Markup.button.url('🌐 WEB PORTFOLIO', WEB)]
-  ]);
-};
-
-// 7. START: Neural Interface Initialization
-bot.start((ctx) => {
-  const name = escape(ctx.from.first_name || 'Agent');
-  const welcomeText = 
-    `*⚡ LAZZ TECH NEURAL INTERFACE v5\\.0* ⚡\n` +
-    `\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\n` +
-    `*SCANNING USER\\.\\.\\.* \n` +
-    `👤 *IDENTITY:* ${name}\n` +
-    `🆔 *USER ID:* \`${ctx.from.id}\` \n` +
-    `⏰ *STATUS:* ACTIVE NODE\n` +
-    `\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\\=\n\n` +
-    `Welcome to the mainframe\\. Select an operation to begin\\.`;
-
-  ctx.replyWithMarkdownV2(welcomeText + footer, mainMenu());
-});
-
-// 8. SERVICES & ORDER FLOW
-bot.action('services', (ctx) => {
-  ctx.editMessageText(
-    `*🛡️ MASTER SERVICES ARCHIVE:* \n` +
-    `\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n` +
-    `• *VPN:* High\\-speed VLESS/Reality tunneling\\.\n` +
-    `• *VPS:* Server management \\& custom panels\\.\n` +
-    `• *DEV:* Custom Web \\& Mobile App engineering\\.\n\n` +
-    `Select "ORDER NOW" to initiate a service request\\.`,
-    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([
-      [Markup.button.callback('🛒 ORDER NOW', 'order_start')],
-      [Markup.button.callback('🔙 BACK', 'start_menu')]
-    ])}
-  ).catch(() => {});
-});
-
-bot.action('order_start', (ctx) => {
-  ctx.editMessageText(`📦 *SELECT SERVICE TYPE:*`, {
-    parse_mode: 'MarkdownV2',
-    ...Markup.inlineKeyboard([
-      [Markup.button.callback('Premium VPN Config', 'order_vpn'), Markup.button.callback('VPS Management', 'order_vps')],
-      [Markup.button.callback('🔙 BACK', 'services')]
-    ])
-  });
-});
-
-bot.action(/order_/, (ctx) => {
-  const type = ctx.match.input.split('_')[1].toUpperCase();
-  // Notify Admin (You)
-  bot.telegram.sendMessage(ADMIN_ID, `🔔 *NEW ORDER INITIATED*\nUser: ${ctx.from.first_name}\nType: ${type}\nID: ${ctx.from.id}`);
-  
-  ctx.reply(`✅ *ORDER LOGGED:* I have notified the Master regarding your ${type} request\\. Redirecting to WhatsApp for finalization\\.\\.\\.`)
-     .then(() => {
-        ctx.reply(`Click here to finish: https://wa.me/${WHATSAPP}?text=I%20want%20to%20order%20${type}`);
-     });
-});
-
-// 9. OTHER SECTIONS
-bot.action('projects', (ctx) => {
-  ctx.editMessageText(`*📂 PROJECT ARCHIVES:* \n\n1\\. *Paulah App:* Cloud storage\\.\n2\\. *WhatsApp Brain:* Autonomous bot suite\\.\n3\\. *Global Nodes:* Tunneling infrastructure\\.` + footer,
-    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start_menu')]]) }
-  ).catch(() => {});
-});
-
-bot.action('stack', (ctx) => {
-  ctx.editMessageText(`*🛠 TECH MASTER STACK:* \n\nNode\\.js \\| Linux \\| VLESS \\| Reality \\| MongoDB \\| Firebase \\| React Native` + footer,
-    { parse_mode: 'MarkdownV2', ...Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'start_menu')]]) }
-  ).catch(() => {});
-});
-
-bot.action('start_menu', (ctx) => {
-  ctx.editMessageText(`*⚡ LAZZ TECH MAIN INTERFACE* \nSelect an operation:`, { parse_mode: 'MarkdownV2', ...mainMenu() }).catch(() => {});
-});
-
-bot.launch();
-console.log("Elite Lazz Tech Bot: Operational.");
