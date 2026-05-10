@@ -74,7 +74,7 @@ bot.action('item_vpn', async (ctx) => {
   ---【 💰 ＰＲＩＣＩＮＧ 】---
   ◈  3 DAYS  ...........  Ksh 20
   ◈  1 WEEK  ...........  Ksh 50
-  ◈  1 MONTH ..........  Ksh 150
+  ◈  1 MONTH ..........  Ksh 300
   ◈  1 YEAR  ............  Ksh 1,300
   -----------------------------
   📩 DM FOR CONFIG NOW!
