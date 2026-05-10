@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAZZ TECH | BOT ARCHITECTURE</title>
+    <style>
+        :root {
+            --cyber-yellow: #f0db4f;
+            --neon-magenta: #ff00ff;
+            --bg-black: #050505;
+            --glass-blue: rgba(0, 243, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 40px;
+            margin: 0;
+        }
+
+        .header-section {
+            border-left: 10px solid var(--neon-magenta);
+            padding-left: 25px;
+            margin-bottom: 50px;
+            background: linear-gradient(90deg, var(--glass-blue), transparent);
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            color: var(--neon-magenta);
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .bot-card {
+            border: 1px solid #333;
+            background: #0a0a0a;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .bot-card:hover {
+            border-color: var(--neon-magenta);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+        }
+
+        .tech-tag {
+            background: var(--cyber-yellow);
+            color: black;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 2px;
+            margin-right: 10px;
+        }
+
+        .schematic-box {
+            background: #000;
+            border: 1px dashed #444;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--cyber-yellow);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--neon-magenta);
+            text-decoration: none;
+            border: 1px solid var(--neon-magenta);
+            padding: 12px 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-link:hover {
+            background: var(--neon-magenta);
+            color: white;
+        }
+
+        h2 { color: white; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        b { color: var(--neon-magenta); }
+    </style>
+</head>
+<body>
+
+    <div class="header-section">
+        <p style="color: var(--cyber-yellow);">LOG_FILE: BOT_DEPLOYMENT_v2.0.4</p>
+        <h1>02. BOT ARCHITECTURE & AUTOMATION</h1>
+        <p>Advanced cloud-based agents and terminal automation scripts.</p>
+    </div>
+
+    <div class="grid-layout">
+        <div class="bot-card">
+            <h2>WhatsApp Multi-Device Cloud System</h2>
+            <div style="margin-bottom: 15px;">
+                <span class="tech-tag">NODE.JS</span>
+                <span class="tech-tag">MONGODB</span>
+                <span class="tech-tag">BAILEYS</span>
+            </div>
+            <p>A production-level WhatsApp bot integrated with <b>MongoDB Atlas</b> for persistent data storage.</p>
+            <ul>
+                <li><b>Multi-Device Support:</b> Operates 24/7 via headless browser sessions on Linux servers.</li>
+                <li><b>Media Handling:</b> Automated processing of images, videos, and documents with cloud backup.</li>
+                <li><b>Database Sync:</b> Real-time user session management and command logging.</li>
+            </ul>
+            <div class="schematic-box">
+                [AUTH_STATE] >> SYNC_TO_CLOUD <br>
+                [DB_STATUS] >> CONNECTED TO CLUSTER0 <br>
+                [RUNTIME] >> PM2 PROCESS ACTIVE
+            </div>
+        </div>
+
+        <div class="bot-card">
+            <h2>Telegram Master & Server Scripts</h2>
+            <div style="margin-bottom: 15px;">
+                <span class="tech-tag">PYTHON</span>
+                <span class="tech-tag">BASH</span>
+                <span class="tech-tag">TELEBOT</span>
+            </div>
+            <p>Automated server monitoring and remote control bots for Linux administration.</p>
+            <ul>
+                <li><b>SSH Bot:</b> Remote terminal execution via Telegram for server reboots and health checks.</li>
+                <li><b>Tunneling Scripts:</b> Automated scanning and updating of zero-rated bug hosts.</li>
+                <li><b>VCF Management:</b> Custom scripts to generate and manage shared contact files for technical teams.</li>
+            </ul>
+            <div class="schematic-box">
+                [SERVER_MONITOR] >> CHECKING CPU/RAM... <br>
+                [SCRAPER] >> FETCHING NEW SNI HOSTS... <br>
+                [AUTO_DEPLOY] >> GIT PULL SUCCESSFUL
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-link"><< BACK TO MAIN FRAME</a>
+
+</body>
+    </html>
+      
