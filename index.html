@@ -3,160 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lazz Tech | Engineering the Invisible</title>
+    <title>Lazz Tech | Advanced Systems</title>
     <style>
         :root {
-            --primary: #00d4ff;
-            --secondary: #00ff41;
-            --bg: #050b14;
-            --card: rgba(15, 23, 42, 0.8);
-            --text: #e2e8f0;
+            --primary-cyan: #00e5ff;
+            --bg-dark: #0a0e14;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-dim: #b0bec5;
         }
 
         body {
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(0, 212, 255, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(0, 255, 65, 0.1) 0px, transparent 50%);
-            color: var(--text);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow-x: hidden;
         }
 
-        .pro-container {
+        .container {
             width: 90%;
-            max-width: 450px;
-            background: var(--card);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px 30px;
+            max-width: 400px;
+            background: linear-gradient(145deg, #0f172a, #04070d);
+            padding: 40px 20px;
+            border-radius: 30px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .logo-area img {
-            width: 110px;
-            height: 110px;
+        .logo-ring {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 3px solid var(--primary);
-            padding: 5px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        }
-
-        h1 {
-            font-size: 2rem;
-            margin: 0;
-            letter-spacing: 1px;
-            background: linear-gradient(to right, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 30px 0;
-        }
-
-        .service-tag {
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: bold;
-            color: var(--primary);
-            transition: all 0.3s ease;
-        }
-
-        .service-tag:hover {
-            background: var(--primary);
-            color: #000;
-            transform: translateY(-3px);
-        }
-
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .btn {
-            text-decoration: none;
-            color: white;
-            padding: 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 3px solid var(--primary-cyan);
+            margin: 0 auto 20px;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
         }
 
-        .btn:hover {
-            transform: scale(1.02);
-            filter: brightness(1.2);
+        h1 { margin: 10px 0 5px; font-size: 2rem; letter-spacing: 2px; }
+        .subtitle { color: var(--primary-cyan); font-size: 0.8rem; font-weight: bold; letter-spacing: 3px; margin-bottom: 30px; }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 30px;
         }
 
-        .whatsapp { background: #25d366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); }
-        .telegram { background: #0088cc; box-shadow: 0 4px 15px rgba(0, 136, 204, 0.2); }
-        .github { background: #333; }
-
-        .footer {
-            margin-top: 40px;
-            font-size: 10px;
-            color: #64748b;
-            letter-spacing: 1px;
+        .project-btn {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+            padding: 15px 5px;
+            border-radius: 8px;
+            color: var(--primary-cyan);
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
         }
+
+        .project-btn:hover {
+            background: rgba(0, 229, 255, 0.1);
+            border-color: var(--primary-cyan);
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .whatsapp { background: #25D366; }
+        .telegram { background: #0088cc; }
+        .source { background: #333; }
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-box {
+            background: #161b22;
+            width: 85%;
+            max-width: 350px;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-cyan);
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        #modal-title { color: var(--primary-cyan); margin-top: 0; }
+        #modal-desc { color: var(--text-dim); line-height: 1.6; }
+
+        .close-btn {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid var(--text-dim);
+            color: var(--text-dim);
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .footer { font-size: 0.6rem; color: #555; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div class="pro-container">
-    <div class="logo-area">
-        <!-- Ensure logo.png is in your github repo -->
-        <img src="logo.png" alt="Lazz Tech">
+<div class="container">
+    <div class="logo-ring">
+        <img src="your-logo.png" alt="Lazz Tech" style="width:80%; border-radius:50%;">
     </div>
 
     <h1>Lazz Tech</h1>
-    <div class="subtitle">Advanced Systems Engineer</div>
+    <div class="subtitle">ADVANCED SYSTEMS ENGINEER</div>
 
-    <div class="services-grid">
-        <div class="service-tag">VLESS / REALITY</div>
-        <div class="service-tag">BOT DEPLOYMENT</div>
-        <div class="service-tag">VPS MANAGEMENT</div>
-        <div class="service-tag">NETWORK SECURITY</div>
+    <div class="project-grid">
+        <button class="project-btn" onclick="openModal('VLESS / REALITY', 'Advanced protocol configuration for secure, high-performance tunneling. Optimized for Safaricom and Airtel networks using private bug hosts.')">VLESS / REALITY</button>
+        <button class="project-btn" onclick="openModal('BOT DEPLOYMENT', 'Production-grade WhatsApp and Telegram bots. Built with Node.js and MongoDB for automated system management and user engagement.')">BOT DEPLOYMENT</button>
+        <button class="project-btn" onclick="openModal('VPS MANAGEMENT', 'Expertise in Linux server administration, Pterodactyl panels, and resource monitoring on IONOS and DigitalOcean.')">VPS MANAGEMENT</button>
+        <button class="project-btn" onclick="openModal('NETWORK SECURITY', 'Specialized in subdomain scanning, WebSocket configurations, and zero-rated host identification for secure data tunneling.')">NETWORK SECURITY</button>
     </div>
 
-    <div class="links">
-        <a href="https://wa.me/254106527992" class="btn whatsapp">CONNECT VIA WHATSAPP</a>
-        <a href="https://t.me/@Lazz1235" class="btn telegram">JOIN TELEGRAM CHANNEL</a>
-        <a href="https://github.com/lazztech-ship-it" class="btn github">VIEW SOURCE CODE</a>
-    </div>
+    <a href="https://wa.me/254106527992" class="action-btn whatsapp">CONNECT VIA WHATSAPP</a>
+    <a href="https://t.me/Lazzz@1235" class="action-btn telegram">JOIN TELEGRAM CHANNEL</a>
+    <a href="#" class="action-btn source">VIEW SOURCE CODE</a>
 
-    <div class="footer">
-        BUILT BY LAZZ TECH • SYSTEM VERSION 2.0.4
+    <div class="footer">BUILT BY LAZZ TECH • SYSTEM VERSION 2.0.5</div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <h3 id="modal-title">Project Title</h3>
+        <p id="modal-desc">Detailed description goes here...</p>
+        <button class="close-btn" onclick="document.getElementById('modalOverlay').style.display='none'">CLOSE</button>
     </div>
 </div>
 
+<script>
+    function openModal(title, desc) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-desc').innerText = desc;
+        document.getElementById('modalOverlay').style.display = 'flex';
+    }
+
+    function closeModal(event) {
+        document.getElementById('modalOverlay').style.display = 'none';
+    }
+</script>
+
 </body>
-</html>
+        </html>
+            
