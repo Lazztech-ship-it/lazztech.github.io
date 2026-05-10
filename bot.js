@@ -1,143 +1,84 @@
 const { Telegraf, Markup } = require('telegraf');
 const http = require('http');
+const services = require('./services'); // Importing your technical data
 
-// 1. HIGH-SPEED KEEP-ALIVE
 http.createServer((req, res) => {
-  res.write('LAZZ TECH MAINFRAME: ACTIVE');
+  res.write('LAZZ TECH ELITE SYSTEM: ONLINE');
   res.end();
 }).listen(process.env.PORT || 3000);
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-
-// 2. MASTER CONFIG
 const ADMIN_ID = 7721569968;
 const LOGO_URL = "https://raw.githubusercontent.com/lazztech-ship-it/lazztech.github.io/main/logo.png";
 const WHATSAPP = "254106527992";
 
-// 3. UTILS: The "Pro" Speed Engine
-const getGreeting = () => {
-    const hour = new Date().getHours() + 3; // EAT Sync
-    if (hour < 12) return "Good Morning, Chief! 🌅";
-    if (hour < 18) return "Good Afternoon, Legend! ☀️";
-    return "Good Evening, Boss! 🌙";
-};
+// --- THE MASTER UI ENGINE ---
+const execCommand = async (ctx, cmd, data) => {
+    await ctx.reply(`> _INITIALIZING: ${cmd}_`);
+    await new Promise(r => setTimeout(r, 300));
+    
+    const message = `*${data.title}*\n` +
+                    `────────────────────\n` +
+                    `*TECHNICAL SPECS:*\n${data.specs}\n\n` +
+                    `*OVERVIEW:*\n${data.details}\n\n` +
+                    `*PRICING:*\n${data.pricing}`;
 
-// This function kills lag by deleting the old menu and spawning a new one instantly
-const fastSwitch = async (ctx, text, keyboard) => {
-    try { await ctx.deleteMessage(); } catch (e) {}
-    return ctx.replyWithMarkdown(text, keyboard);
-};
-
-// 4. THE HUB KEYBOARD
-const hubMenu = Markup.inlineKeyboard([
-    [Markup.button.callback('👨‍💻 THE MASTER', 'about_me'), Markup.button.callback('🚀 SERVICES', 'catalog')],
-    [Markup.button.callback('📡 TUNNELING LOG', 'tunneling'), Markup.button.callback('📂 PROJECTS', 'projects')],
-    [Markup.button.callback('🛡️ SECURITY MATRIX', 'security'), Markup.button.callback('🖥️ VPS TERMINAL', 'vps')],
-    [Markup.button.callback('✍️ SEND FEEDBACK', 'feedback')],
-    [Markup.button.url('🌐 WEB INTERFACE', 'https://lazztech-ship-it.github.io')]
-]);
-
-// 5. CORE COMMANDS
-bot.start(async (ctx) => {
-    const name = ctx.from.first_name;
-    await ctx.replyWithPhoto(LOGO_URL, {
-        caption: `*${getGreeting()}*\n` +
-                 `────────────────────\n` +
-                 `*SYSTEM:* Lazz Tech Elite v2.3\n` +
-                 `*STATUS:* OPTIMIZED & ENCRYPTED\n\n` +
-                 `Welcome, *${name}*. Mainframe initialized. Select a module to begin.`,
-        parse_mode: 'Markdown',
-        ...hubMenu
-    });
-});
-
-// 6. MODULE: SERVICES CATALOG
-bot.action('catalog', async (ctx) => {
-    const text = `*🚀 MASTER SERVICE HUB*\n────────────────────\nAll technical solutions are negotiable and high-performance. Select a category:`;
-    await fastSwitch(ctx, text, Markup.inlineKeyboard([
-        [Markup.button.callback('📡 VPN CONFIGS', 'item_vpn')],
-        [Markup.button.callback('🖥️ VPS MANAGEMENT', 'item_vps')],
-        [Markup.button.callback('📱 MOBILE APP DEV', 'item_dev')],
+    return ctx.replyWithMarkdown(message, Markup.inlineKeyboard([
+        [Markup.button.url('💬 NEGOTIATE / ORDER', `https://wa.me/${WHATSAPP}`)],
         [Markup.button.callback('🔙 BACK TO HUB', 'back_to_hub')]
     ]));
-});
+};
 
-// 7. PRICING: VPN (YOUR EXACT LIST)
-bot.action('item_vpn', async (ctx) => {
-    const vpnText = `
-\`\`\`
-╔════════════════════════════════════╗
-      🚀  ＬＡＺＺ  ＴＥＣＨ  ＶＰＮ  🚀
-╚════════════════════════════════════╝
-  [ ⚡ ]  UNLIMITED BANDWIDTH
-  [ 🔒 ]  ENCRYPTED TUNNELING
-  ---【 💰 ＰＲＩＣＩＮＧ 】---
-  ◈  3 DAYS  ...........  Ksh 20
-  ◈  1 WEEK  ...........  Ksh 50
-  ◈  1 MONTH ..........  Ksh 300
-  ◈  1 YEAR  ............  Ksh 1,300
-  -----------------------------
-  📩 DM FOR CONFIG NOW!
-\`\`\``;
-    await fastSwitch(ctx, vpnText, Markup.inlineKeyboard([
-        [Markup.button.url('💬 NEGOTIATE ON WHATSAPP', `https://wa.me/${WHATSAPP}?text=Hi%20Lazz!%20I%20want%20the%20VPN%20Config.`)],
-        [Markup.button.callback('🔙 BACK', 'catalog')]
-    ]));
-});
+// --- MAIN HUB ---
+const hubMenu = Markup.inlineKeyboard([
+    [Markup.button.callback('📡 TUNNELING LOG', 'nav_vpn'), Markup.button.callback('🖥️ VPS TERMINAL', 'nav_vps')],
+    [Markup.button.callback('📱 APP DEVELOPMENT', 'nav_dev'), Markup.button.callback('📂 PROJECTS', 'nav_projects')],
+    [Markup.button.callback('👨‍💻 THE MASTER', 'nav_about'), Markup.button.callback('✍️ FEEDBACK', 'nav_feedback')]
+]);
 
-// 8. PRICING: VPS (NEW TERMINAL STYLE)
-bot.action('item_vps', async (ctx) => {
-    const vpsText = `
-\`\`\`
-╔════════════════════════════════════╗
-      🖥️  ＶＰＳ  ＭＡＮＡＧＥＭＥＮＴ  🖥️
-╚════════════════════════════════════╝
-  [ 🛠️ ]  3X-UI & PTERODACTYL SETUP
-  [ 🛡️ ]  SECURITY HARDENING
-  ---【 💰 ＰＲＩＣＩＮＧ 】---
-  ◈  BASIC CONFIG .......  Ksh 150
-  ◈  3X-UI SETUP ........  Ksh 350
-  ◈  PTERODACTYL ........  Ksh 800
-  ◈  FULL HARDENING .....  Ksh 1,200
-  -----------------------------
-  🛰️ Status: ONLINE [🟢]
-\`\`\``;
-    await fastSwitch(ctx, vpsText, Markup.inlineKeyboard([
-        [Markup.button.url('💬 DISCUSS SETUP', `https://wa.me/${WHATSAPP}?text=Hi%20Lazz!%20I%20need%20a%20VPS%20Setup.`)],
-        [Markup.button.callback('🔙 BACK', 'catalog')]
-    ]));
-});
-
-// 9. MODULE: PROJECTS (PAULAH APP & OTHERS)
-bot.action('projects', async (ctx) => {
-    const text = `*📂 PROJECT ARCHIVES*\n────────────────────\n` +
-                 `• **Paulah App**: Cloud & Mobile Security\n` +
-                 `• **WhatsApp Brain**: Autonomous AI Bot\n` +
-                 `• **Lazz Tech Web**: Cyber-Interface 2026\n\n` +
-                 `All source codes are managed in the Master Repository.`;
-    await fastSwitch(ctx, text, Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK TO HUB', 'back_to_hub')]]));
-});
-
-// 10. BACK TO HUB ACTION (RESHOOT PHOTO)
-bot.action('back_to_hub', async (ctx) => {
-    try { await ctx.deleteMessage(); } catch (e) {}
-    await ctx.replyWithPhoto(LOGO_URL, {
-        caption: `*BACK AT THE HUB*\n────────────────────\nSystem ready for your next command, *${ctx.from.first_name}*.`,
+bot.start((ctx) => {
+    ctx.replyWithPhoto(LOGO_URL, {
+        caption: `*⚡ LAZZ TECH MAIN INTERFACE v4.0* ⚡\n` +
+                 `────────────────────\n` +
+                 `*OPERATOR:* ${ctx.from.first_name}\n` +
+                 `*STATUS:* SYSTEM SECURE\n\n` +
+                 `Select a terminal module to begin.`,
         parse_mode: 'Markdown',
         ...hubMenu
     });
 });
 
-// 11. FEEDBACK SYSTEM
-bot.action('feedback', async (ctx) => {
-    await fastSwitch(ctx, `*✍️ FEEDBACK MODE*\nType \`/message [your text]\` to send a sweet message to the Master.`, Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'back_to_hub')]]));
+// --- DYNAMIC NAVIGATION ---
+bot.action('nav_vpn', (ctx) => execCommand(ctx, 'TUNNEL_DATA', services.vpn));
+bot.action('nav_vps', (ctx) => execCommand(ctx, 'VPS_TERMINAL', services.vps));
+bot.action('nav_dev', (ctx) => execCommand(ctx, 'DEV_LOGS', services.dev));
+
+bot.action('nav_projects', async (ctx) => {
+    await ctx.reply(`> _FETCHING_ARCHIVES..._`);
+    ctx.replyWithMarkdown(`*📂 PROJECT REPOSITORY*\n────────────────────\n• **Paulah App**: Security Vault\n• **WhatsApp Brain**: Automation Bot\n• **Lazz Portfolio**: Cyber UI Web`, 
+    Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'back_to_hub')]]));
+});
+
+bot.action('back_to_hub', async (ctx) => {
+    await ctx.reply(`*Returning to Hub...*`);
+    return ctx.replyWithPhoto(LOGO_URL, {
+        caption: `*⚡ LAZZ TECH MAIN INTERFACE*\nReady for input.`,
+        parse_mode: 'Markdown',
+        ...hubMenu
+    });
+});
+
+// --- FEEDBACK SYSTEM ---
+bot.action('nav_feedback', (ctx) => {
+    ctx.reply(`*✍️ FEEDBACK CHANNEL*\nType \`/message [text]\` to talk to Lazz.`, 
+    Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'back_to_hub')]]));
 });
 
 bot.hears(/\/message (.+)/, (ctx) => {
-    const userMsg = ctx.match[1];
-    ctx.telegram.sendMessage(ADMIN_ID, `🌟 *FEEDBACK:* ${userMsg}\nFrom: ${ctx.from.first_name}`);
-    ctx.reply(`✅ Message sent! Lazz has been notified. ❤️`);
+    ctx.telegram.sendMessage(ADMIN_ID, `🌟 *NEW FEEDBACK:* ${ctx.match[1]}\nFrom: ${ctx.from.first_name}`);
+    ctx.reply(`✅ Message sent to Master Lazz!`);
 });
 
 bot.launch();
-console.log("Lazz Tech High-Speed Mainframe: Operational.");
+console.log("Lazz Tech Elite System: Operational.");
+  
