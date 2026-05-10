@@ -154,8 +154,8 @@
         <button class="project-btn" onclick="openModal('NETWORK SECURITY', 'Specialized in subdomain scanning, WebSocket configurations, and zero-rated host identification for secure data tunneling.')">NETWORK SECURITY</button>
     </div>
 
-    <a href="https://wa.me/yournumber" class="action-btn whatsapp">CONNECT VIA WHATSAPP</a>
-    <a href="https://t.me/yourchannel" class="action-btn telegram">JOIN TELEGRAM CHANNEL</a>
+    <a href="https://wa.me/254106527992" class="action-btn whatsapp">CONNECT VIA WHATSAPP</a>
+    <a href="https://t.me/Lazzz@1235" class="action-btn telegram">JOIN TELEGRAM CHANNEL</a>
     <a href="#" class="action-btn source">VIEW SOURCE CODE</a>
 
     <div class="footer">BUILT BY LAZZ TECH • SYSTEM VERSION 2.0.5</div>
