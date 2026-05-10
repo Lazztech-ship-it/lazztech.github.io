@@ -74,7 +74,7 @@ bot.action('back_to_hub', async (ctx) => {
 
 // --- FEEDBACK SYSTEM ---
 bot.action('nav_feedback', (ctx) => {
-    ctx.reply(`*✍️ FEEDBACK CHANNEL*\nType \`/message [text]\` to talk to Lazz.`, 
+    ctx.reply(`*✍️ FEEDBACK CHANNEL*\n────────────────────\nType \`/message\` followed by your text to talk directly to Lazz.\n\nExample: \`/message Your bot is amazing!\``, 
     Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'back_to_hub')]]));
 });
 
