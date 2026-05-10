@@ -3,204 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lazz Tech | Advanced Systems Engineer</title>
+    <title>Lazz Tech | Advanced Systems</title>
     <style>
         :root {
-            --primary-blue: #00d2ff;
-            --bg-dark: #050a12;
-            --card-bg: #0d1624;
+            --primary-cyan: #00e5ff;
+            --bg-dark: #0a0e14;
+            --card-bg: rgba(255, 255, 255, 0.05);
             --text-main: #ffffff;
-            --text-dim: #a0aec0;
+            --text-dim: #b0bec5;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
         }
 
         .container {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
-            width: 100%;
-            max-width: 450px;
+            width: 90%;
+            max-width: 400px;
+            background: linear-gradient(145deg, #0f172a, #04070d);
+            padding: 40px 20px;
+            border-radius: 30px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 210, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .profile-img {
+        .logo-ring {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid var(--primary-blue);
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-            margin-bottom: 20px;
+            border: 3px solid var(--primary-cyan);
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
         }
 
-        h1 { margin: 10px 0; font-size: 2rem; letter-spacing: 1px; }
-        .subtitle { color: var(--primary-blue); font-weight: bold; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 30px; text-transform: uppercase; }
+        h1 { margin: 10px 0 5px; font-size: 2rem; letter-spacing: 2px; }
+        .subtitle { color: var(--primary-cyan); font-size: 0.8rem; font-weight: bold; letter-spacing: 3px; margin-bottom: 30px; }
 
-        .grid {
+        /* Project Grid */
+        .project-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 30px;
         }
 
-        .tech-btn {
-            background: rgba(0, 210, 255, 0.05);
-            border: 1px solid rgba(0, 210, 255, 0.3);
-            color: var(--primary-blue);
-            padding: 12px;
+        .project-btn {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+            padding: 15px 5px;
             border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
+            color: var(--primary-cyan);
             font-size: 0.75rem;
-        }
-
-        .tech-btn:hover {
-            background: var(--primary-blue);
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
-        }
-
-        .action-btn {
-            width: 100%;
-            padding: 15px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .project-btn:hover {
+            background: rgba(0, 229, 255, 0.1);
+            border-color: var(--primary-cyan);
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            text-decoration: none;
             color: white;
             transition: 0.3s;
         }
 
-        .whatsapp { background-color: #25D366; }
-        .telegram { background-color: #0088cc; }
-        .source { background-color: #333; }
-
-        .action-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+        .whatsapp { background: #25D366; }
+        .telegram { background: #0088cc; }
+        .source { background: #333; }
 
         /* MODAL STYLES */
-        .overlay {
-            display: none;
+        .modal-overlay {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             backdrop-filter: blur(5px);
         }
 
-        .overlay-content {
-            background: #0a1526;
-            padding: 30px;
-            border: 1px solid var(--primary-blue);
-            border-radius: 15px;
+        .modal-box {
+            background: #161b22;
             width: 85%;
-            max-width: 400px;
+            max-width: 350px;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-cyan);
             position: relative;
-            animation: fadeIn 0.3s ease-out;
+            animation: slideUp 0.3s ease-out;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        #modal-title { color: var(--primary-cyan); margin-top: 0; }
+        #modal-desc { color: var(--text-dim); line-height: 1.6; }
 
         .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 28px;
-            color: var(--primary-blue);
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid var(--text-dim);
+            color: var(--text-dim);
+            padding: 8px 20px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
-        .modal-body { text-align: left; font-size: 0.9rem; line-height: 1.6; color: var(--text-dim); }
-        .modal-body b { color: var(--primary-blue); }
-        hr { border: 0.5px solid rgba(0, 210, 255, 0.2); margin: 15px 0; }
-
-        .footer { margin-top: 30px; font-size: 0.7rem; color: #555; }
+        .footer { font-size: 0.6rem; color: #555; margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="https://raw.githubusercontent.com/lazztech-ship-it/lazztech.github.io/main/logo.png" alt="Lazz Tech Logo" class="profile-img">
-    <h1>Lazz Tech</h1>
-    <div class="subtitle">Advanced Systems Engineer</div>
-
-    <div class="grid">
-        <button class="tech-btn" onclick="showDetails('vless')">VLESS / REALITY</button>
-        <button class="tech-btn" onclick="showDetails('bot')">BOT DEPLOYMENT</button>
-        <button class="tech-btn" onclick="showDetails('vps')">VPS MANAGEMENT</button>
-        <button class="tech-btn" onclick="showDetails('security')">NETWORK SECURITY</button>
+    <div class="logo-ring">
+        <img src="your-logo.png" alt="Lazz Tech" style="width:80%; border-radius:50%;">
     </div>
 
-    <button class="action-btn whatsapp" onclick="window.location.href='https://wa.me/254106527992'">CONNECT VIA WHATSAPP</button>
-    <button class="action-btn telegram" onclick="window.location.href='https://t.me/Lazz@1235'">JOIN TELEGRAM CHANNEL</button>
-    <button class="action-btn source" onclick="window.location.href='https://github.com/lazztech-ship-it'">VIEW SOURCE CODE</button>
+    <h1>Lazz Tech</h1>
+    <div class="subtitle">ADVANCED SYSTEMS ENGINEER</div>
+
+    <div class="project-grid">
+        <button class="project-btn" onclick="openModal('VLESS / REALITY', 'Advanced protocol configuration for secure, high-performance tunneling. Optimized for Safaricom and Airtel networks using private bug hosts.')">VLESS / REALITY</button>
+        <button class="project-btn" onclick="openModal('BOT DEPLOYMENT', 'Production-grade WhatsApp and Telegram bots. Built with Node.js and MongoDB for automated system management and user engagement.')">BOT DEPLOYMENT</button>
+        <button class="project-btn" onclick="openModal('VPS MANAGEMENT', 'Expertise in Linux server administration, Pterodactyl panels, and resource monitoring on IONOS and DigitalOcean.')">VPS MANAGEMENT</button>
+        <button class="project-btn" onclick="openModal('NETWORK SECURITY', 'Specialized in subdomain scanning, WebSocket configurations, and zero-rated host identification for secure data tunneling.')">NETWORK SECURITY</button>
+    </div>
+
+    <a href="https://wa.me/yournumber" class="action-btn whatsapp">CONNECT VIA WHATSAPP</a>
+    <a href="https://t.me/yourchannel" class="action-btn telegram">JOIN TELEGRAM CHANNEL</a>
+    <a href="#" class="action-btn source">VIEW SOURCE CODE</a>
 
     <div class="footer">BUILT BY LAZZ TECH • SYSTEM VERSION 2.0.5</div>
 </div>
 
-<div id="detail-overlay" class="overlay">
-    <div class="overlay-content">
-        <span class="close-btn" onclick="closeDetails()">&times;</span>
-        <h2 id="detail-title" style="color: var(--primary-blue);">Title</h2>
-        <hr>
-        <div id="detail-body" class="modal-body">
-            </div>
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <h3 id="modal-title">Project Title</h3>
+        <p id="modal-desc">Detailed description goes here...</p>
+        <button class="close-btn" onclick="document.getElementById('modalOverlay').style.display='none'">CLOSE</button>
     </div>
 </div>
 
 <script>
-    const projectData = {
-        'vless': {
-            title: "Tunneling Architecture",
-            content: "Expertise in deploying high-performance tunneling protocols. <b>Projects:</b> Optimized VLESS and Reality protocols with XTLS-core for anti-detection and ultra-low latency. Skilled in scanning zero-rated SNI hosts for regional ISP bypassing."
-        },
-        'bot': {
-            title: "Bot Development",
-            content: "Full-stack automation solutions. <b>Major Project:</b> Built a cloud-hosted WhatsApp bot system using Node.js and MongoDB. Features include automated response systems and multi-device cloud synchronization."
-        },
-        'vps': {
-            title: "Infrastructure Management",
-            content: "Managing robust server environments. <b>System:</b> Administration of Linux-based VPS (Ubuntu/Debian) via Termux and SSH. Experience with DigitalOcean and IONOS for hosting high-traffic management panels like 3x-ui."
-        },
-        'security': {
-            title: "Network & App Security",
-            content: "Systems engineering and mobile security. <b>Featured Project:</b> The 'Paulah App'—a secure mobile solution built with React Native and Expo. Expertise in network packet analysis and firewall configuration."
-        }
-    };
-
-    function showDetails(key) {
-        document.getElementById('detail-title').innerText = projectData[key].title;
-        document.getElementById('detail-body').innerHTML = projectData[key].content;
-        document.getElementById('detail-overlay').style.display = 'flex';
+    function openModal(title, desc) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-desc').innerText = desc;
+        document.getElementById('modalOverlay').style.display = 'flex';
     }
 
-    function closeDetails() {
-        document.getElementById('detail-overlay').style.display = 'none';
-    }
-
-    // Close modal if clicking outside the box
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('detail-overlay')) {
-            closeDetails();
-        }
+    function closeModal(event) {
+        document.getElementById('modalOverlay').style.display = 'none';
     }
 </script>
 
 </body>
 </html>
-  
