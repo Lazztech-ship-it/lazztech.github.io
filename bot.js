@@ -10,7 +10,7 @@ http.createServer((req, res) => {
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const ADMIN_ID = 7721569968;
-const LOGO_URL = "https://raw.githubusercontent.com/lazztech-ship-it/lazztech.github.io/main/logo.png";
+const LOGO_URL = "https://i.postimg.cc/PxsrSgKm/logo.png";
 const WHATSAPP = "254106527992";
 
 // 2. THE MASTER UI COMMAND ENGINE
