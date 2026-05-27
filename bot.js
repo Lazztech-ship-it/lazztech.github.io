@@ -57,10 +57,23 @@ bot.action('nav_dev', (ctx) => execCommand(ctx, 'DEV_LOGS', services.dev));
 bot.action('nav_security', (ctx) => execCommand(ctx, 'SEC_MATRIX_LOAD', services.security));
 bot.action('nav_about', (ctx) => execCommand(ctx, 'MASTER_PROFILE_LOAD', services.master));
 
+// --- PROJECT SUBSYSTEM INTERFACE ---
 bot.action('nav_projects', async (ctx) => {
-    await ctx.reply(`> _FETCHING_ARCHIVES..._`);
-    ctx.replyWithMarkdown(`*📂 PROJECT REPOSITORY*\n────────────────────\n• **Paulah App**: Security Vault\n• **WhatsApp Brain**: Automation Bot\n• **Lazz Portfolio**: Cyber UI Web`, 
-    Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK', 'back_to_hub')]]));
+    await ctx.reply(`> _ACCESSING_PROJECT_ARCHIVES..._`);
+    await new Promise(r => setTimeout(r, 300));
+    
+    return ctx.replyWithMarkdown(`*📂 LAZZ TECH INTERNAL REPOSITORY*\n────────────────────\nSelect an archive directory to extract full technical specs and build architectures.`, 
+    Markup.inlineKeyboard([
+        [Markup.button.callback('👑 PAULAH VAULT APP', 'proj_paulah'), Markup.button.callback('🤖 WHATSAPP BRAIN', 'proj_bot')],
+        [Markup.button.callback('🌐 CYBER-UI WEB HUB', 'proj_web')],
+        [Markup.button.callback('🔙 RETURN TO HUB', 'back_to_hub')]
+    ]));
+});
+
+// --- INDIVIDUAL PROJECT ROUTING DATA ---
+bot.action('proj_paulah', (ctx) => execCommand(ctx, 'EXTRACT_PAULAH_VAULT', services.proj_paulah));
+bot.action('proj_bot', (ctx) => execCommand(ctx, 'EXTRACT_WA_BRAIN_BOT', services.proj_bot));
+bot.action('proj_web', (ctx) => execCommand(ctx, 'EXTRACT_CYBER_WEB_UI', services.proj_web));
 });
 
 bot.action('back_to_hub', async (ctx) => {
