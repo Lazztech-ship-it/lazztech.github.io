@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Master Pro - AI/ML | DevOps | Cloud | Cybersecurity | Full-Stack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0d1117;
+            --secondary-bg: #161b22;
+            --tertiary-bg: #21262d;
+            --border-color: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-color: #58a6ff;
+            --accent-hover: #79c0ff;
+            --success-color: #3fb950;
+            --warning-color: #d29922;
+            --danger-color: #f85149;
+            --transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--tertiary-bg) 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background-color: rgba(13, 17, 23, 0.8);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--success-color);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 0.7rem 1.2rem;
+            border: 1px solid var(--border-color);
+            background-color: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--tertiary-bg);
+            color: var(--text-primary);
+            border-color: var(--accent-color);
+        }
+
+        .nav-btn.active {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border-color: var(--accent-color);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .badge-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            background-color: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .action-buttons {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn, .action-btn-link {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .action-btn-primary, .action-btn-link.primary {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+
+        .action-btn-primary:hover, .action-btn-link.primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .action-btn-success, .action-btn-link.success {
+            background-color: var(--success-color);
+            color: var(--primary-bg);
+        }
+
+        .action-btn-success:hover, .action-btn-link.success:hover {
+            background-color: #47d660;
+            transform: translateY(-2px);
+        }
+
+        .action-btn-warning, .action-btn-link.warning {
+            background-color: var(--warning-color);
+            color: var(--primary-bg);
+        }
+
+        .action-btn-warning:hover, .action-btn-link.warning:hover {
+            background-color: #e6a828;
+            transform: translateY(-2px);
+        }
+
+        .action-btn-danger, .action-btn-link.danger {
+            background-color: var(--danger-color);
+            color: var(--primary-bg);
+        }
+
+        .action-btn-danger:hover, .action-btn-link.danger:hover {
+            background-color: #ff7968;
+            transform: translateY(-2px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--accent-color);
+            background: var(--tertiary-bg);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(88, 166, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: var(--tertiary-bg);
+            color: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Skills Section */
+        .skills-category {
+            margin-bottom: 2.5rem;
+        }
+
+        .skills-category h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .skill-item {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            border-color: var(--success-color);
+            background: var(--tertiary-bg);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .level-bar {
+            flex: 1;
+            height: 6px;
+            background-color: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .level-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--success-color));
+            transition: width 0.5s ease-out;
+        }
+
+        .level-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            min-width: 40px;
+            text-align: right;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            padding-left: 2.5rem;
+            padding-bottom: 2rem;
+            position: relative;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .timeline-item:last-child {
+            border-left-color: transparent;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 0;
+            box-shadow: 0 0 0 4px var(--primary-bg), 0 0 0 6px var(--accent-color);
+        }
+
+        .timeline-date {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-company {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .tool-item {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .tool-item:hover {
+            border-color: var(--accent-color);
+            background: var(--tertiary-bg);
+            transform: translateY(-4px);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        /* Network Diagram */
+        .network-container {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .network-svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Certification Badge */
+        .cert-card {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .cert-card:hover {
+            border-color: var(--success-color);
+            background: var(--tertiary-bg);
+            transform: scale(1.05);
+        }
+
+        .cert-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-issuer {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero .badge-group {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">TECH<span>PRO</span></div>
+            <nav>
+                <button class="nav-btn active" onclick="showSection('home')">Home</button>
+                <button class="nav-btn" onclick="showSection('skills')">Skills</button>
+                <button class="nav-btn" onclick="showSection('certifications')">Certifications</button>
+                <button class="nav-btn" onclick="showSection('tools')">Tools</button>
+                <button class="nav-btn" onclick="showSection('network')">Network</button>
+                <button class="nav-btn" onclick="showSection('specialization')">Specialization</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- HOME SECTION -->
+        <section id="home" class="content-section active">
+            <div class="hero">
+                <h1>Professional Tech Master</h1>
+                <p class="subtitle">Expert in AI/ML, Full-Stack Development, DevOps, Cloud Architecture, Cybersecurity & Network Engineering</p>
+                <div class="badge-group">
+                    <span class="badge">🤖 AI/Machine Learning</span>
+                    <span class="badge">💻 Full-Stack Dev</span>
+                    <span class="badge">⚙️ DevOps</span>
+                    <span class="badge">☁️ Cloud Architect</span>
+                    <span class="badge">🔐 Cybersecurity</span>
+                    <span class="badge">🌐 Networking</span>
+                </div>
+                <div style="margin-top: 2.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="mailto:lazosoro30@gmail.com" style="padding: 0.8rem 1.5rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">📧 Send Email</a>
+                    <a href="https://wa.me/254106527992" target="_blank" style="padding: 0.8rem 1.5rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">💬 WhatsApp Chat</a>
+                    <a href="tel:+254106527992" style="padding: 0.8rem 1.5rem; background-color: var(--warning-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#e6a828'" onmouseout="this.style.backgroundColor='var(--warning-color)'">☎️ Call Now</a>
+                    <button onclick="showSection('specialization')" style="padding: 0.8rem 1.5rem; background-color: var(--danger-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#ff7968'" onmouseout="this.style.backgroundColor='var(--danger-color)'">🔥 View Specializations</button>
+                </div>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-title">🚀 What I Do</div>
+                    <div class="card-description">
+                        I architect and deploy scalable, secure, and intelligent systems. From ML pipelines to distributed cloud infrastructure, I turn complex problems into elegant solutions using cutting-edge technologies.
+                    </div>
+                    <button onclick="showSection('specialization')" style="margin-top: 1rem; padding: 0.6rem 1.2rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; transition: var(--transition); width: 100%;" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Learn More →</button>
+                </div>
+                <div class="card">
+                    <div class="card-title">🎯 Specialization</div>
+                    <div class="card-description">
+                        AI/ML pipelines, microservices architecture, container orchestration, AWS/Azure/GCP infrastructure, penetration testing, network security, and full-stack applications with modern frameworks.
+                    </div>
+                    <button onclick="showSection('skills')" style="margin-top: 1rem; padding: 0.6rem 1.2rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; transition: var(--transition); width: 100%;" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">View Skills →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="content-section">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <p class="section-subtitle">Comprehensive technical proficiency across multiple domains</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+                <a href="https://wa.me/254106527992?text=I%20want%20to%20hire%20you%20for%20skills%20development" target="_blank" style="padding: 0.7rem 1.3rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">💼 Hire For Project</a>
+                <button onclick="showSection('certifications')" style="padding: 0.7rem 1.3rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">🏆 View Certifications</button>
+                <button onclick="showSection('tools')" style="padding: 0.7rem 1.3rem; background-color: var(--warning-color); color: var(--primary-bg); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#e6a828'" onmouseout="this.style.backgroundColor='var(--warning-color)'">🛠️ Tech Stack</button>
+            </div>
+
+            <div class="skills-category">
+                <h3>🤖 AI & Machine Learning</h3>
+                <div class="skill-item">
+                    <div class="skill-name">Deep Learning & Neural Networks</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 95%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Natural Language Processing (NLP)</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 90%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Computer Vision</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 88%"></div></div>
+                        <span class="level-text">Advanced</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Model Deployment & MLOps</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 92%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>💻 Full-Stack Development</h3>
+                <div class="skill-item">
+                    <div class="skill-name">Frontend (React, Vue, Angular)</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 93%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Backend (Node.js, Python, Go)</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 95%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Database Design & Optimization</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 91%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">API Development & REST/GraphQL</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 94%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>⚙️ DevOps & Infrastructure</h3>
+                <div class="skill-item">
+                    <div class="skill-name">Docker & Container Orchestration</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 93%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Kubernetes (K8s) Management</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 91%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">CI/CD Pipelines</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 92%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Infrastructure as Code (Terraform, Ansible)</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 89%"></div></div>
+                        <span class="level-text">Advanced</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>☁️ Cloud Architecture</h3>
+                <div class="skill-item">
+                    <div class="skill-name">AWS (EC2, S3, Lambda, RDS, VPC)</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 94%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Microsoft Azure</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 88%"></div></div>
+                        <span class="level-text">Advanced</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Google Cloud Platform (GCP)</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 87%"></div></div>
+                        <span class="level-text">Advanced</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Serverless Architecture</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 90%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>🔐 Cybersecurity & Penetration Testing</h3>
+                <div class="skill-item">
+                    <div class="skill-name">Penetration Testing & Vulnerability Assessment</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 92%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Network Security & Firewalls</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 90%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Application Security & OWASP</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 91%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Incident Response & Threat Hunting</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 88%"></div></div>
+                        <span class="level-text">Advanced</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>🌐 Networking & Infrastructure</h3>
+                <div class="skill-item">
+                    <div class="skill-name">TCP/IP & OSI Model</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 94%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Network Design & Topology</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 91%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">VPN, Load Balancing, DNS</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 90%"></div></div>
+                        <span class="level-text">Expert</span>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Network Monitoring & Diagnostics</div>
+                    <div class="skill-level">
+                        <div class="level-bar"><div class="level-fill" style="width: 89%"></div></div>
+                        <span class="level-text">Advanced</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPECIALIZATION SECTION -->
+        <section id="specialization" class="content-section">
+            <h2 class="section-title">Advanced Specializations</h2>
+            <p class="section-subtitle">Deep expertise in cutting-edge technologies and advanced implementations</p>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-title">🤖 Bot Creation & Development</div>
+                    <div class="card-subtitle">Intelligent Automation</div>
+                    <div class="card-description">
+                        <strong>Discord/Telegram Bot Framework:</strong> Building feature-rich bots using discord.py, python-telegram-bot, and Node.js libraries. Implementation of event listeners, command handlers, and middleware architecture for robust bot operations.
+                        <br><br>
+                        <strong>Automation Logic:</strong> Creating sophisticated bot behaviors using state machines, pattern matching, and NLP for natural language understanding. Implementing scheduling, task queuing, and async operations for responsive bot interactions.
+                        <br><br>
+                        <strong>Database Integration:</strong> Connecting bots to MongoDB, PostgreSQL, and Redis for persistent state management, user preferences, and command caching. Implementing rate limiting and usage analytics.
+                        <br><br>
+                        <strong>Example Projects:</strong>
+                        <br>✓ Paulah App - Custom integration bot for WhatsApp and Telegram
+                        <br>✓ Gaming App Bot - Real-time game state management and player interaction
+                        <br>✓ Admin Automation Bots - Moderation, logging, and server management
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20help%20with%20bot%20creation%20and%20development" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Inquire</a>
+                        <a href="mailto:lazosoro30@gmail.com?subject=Bot%20Creation%20Service" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Email</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🚀 Bot Deployment & Scaling</div>
+                    <div class="card-subtitle">Production-Grade Infrastructure</div>
+                    <div class="card-description">
+                        <strong>Containerization:</strong> Deploying bots in Docker containers with proper resource limits, health checks, and auto-restart policies. Multi-container setups with Docker Compose for complex bot ecosystems.
+                        <br><br>
+                        <strong>Cloud Deployment Platforms:</strong>
+                        <br>→ AWS EC2/ECS for scalable bot hosting
+                        <br>→ Heroku for rapid bot deployment with automatic scaling
+                        <br>→ Railway and Replit for quick prototyping
+                        <br>→ Azure Container Instances for enterprise deployments
+                        <br><br>
+                        <strong>High Availability:</strong> Load balancing across multiple bot instances, failover mechanisms, and health monitoring. Implementing bot clustering for handling millions of messages per day.
+                        <br><br>
+                        <strong>Monitoring & Logging:</strong> ELK stack integration for bot event logging, Prometheus metrics for bot performance, and Grafana dashboards for real-time monitoring of bot health and activity.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20help%20with%20bot%20deployment%20and%20scaling" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Inquire</a>
+                        <a href="mailto:lazosoro30@gmail.com?subject=Bot%20Deployment%20Service" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Email</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🔒 VPN Creation & Configuration</div>
+                    <div class="card-subtitle">Secure Network Solutions</div>
+                    <div class="card-description">
+                        <strong>VPN Protocols:</strong> Expertise in OpenVPN, WireGuard, and IPSec implementations. Configuring site-to-site VPNs, client-to-site VPNs, and mesh VPN architectures for enterprise connectivity.
+                        <br><br>
+                        <strong>Infrastructure Setup:</strong>
+                        <br>→ Setting up VPN servers on AWS, Azure, DigitalOcean, and on-premise infrastructure
+                        <br>→ Certificate management and PKI infrastructure using OpenSSL and Let's Encrypt
+                        <br>→ Firewall rules and network segmentation for secure VPN access
+                        <br><br>
+                        <strong>Encryption:</strong> Implementing AES-256 encryption, elliptic curve cryptography, and perfect forward secrecy. Configuring TLS 1.3 for all VPN connections.
+                        <br><br>
+                        <strong>Performance Optimization:</strong> Implementing compression, UDP optimization, and DNS over VPN. Achieving throughput of 1Gbps+ on high-performance VPN servers.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20VPN%20creation%20and%20configuration" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Inquire</a>
+                        <a href="mailto:lazosoro30@gmail.com?subject=VPN%20Services" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Email</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🔐 Advanced Cybersecurity</div>
+                    <div class="card-subtitle">Threat Detection & Prevention</div>
+                    <div class="card-description">
+                        <strong>Penetration Testing:</strong> Conducting full-scope penetration tests including network reconnaissance, vulnerability scanning, exploitation, and post-exploitation analysis. Writing detailed reports with remediation strategies.
+                        <br><br>
+                        <strong>Vulnerability Management:</strong> Using Nessus, Qualys, and Rapid7 for automated scanning. Creating remediation roadmaps and tracking vulnerability metrics over time.
+                        <br><br>
+                        <strong>Web Application Security:</strong> Testing for OWASP Top 10 vulnerabilities - SQL injection, XSS, CSRF, XXE, broken authentication, sensitive data exposure, XML external entities, broken access control, security misconfiguration, insecure deserialization.
+                        <br><br>
+                        <strong>Red Team Operations:</strong> Simulating advanced persistent threats (APTs), social engineering campaigns, and lateral movement techniques. Providing actionable intelligence for blue team improvements.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20cybersecurity%20services" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Inquire</a>
+                        <a href="mailto:lazosoro30@gmail.com?subject=Cybersecurity%20Services" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Email</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🌐 Advanced Network Engineering</div>
+                    <div class="card-subtitle">Enterprise Infrastructure Design</div>
+                    <div class="card-description">
+                        <strong>Network Architecture:</strong> Designing multi-datacenter networks with redundancy, implementing MPLS for traffic engineering, and deploying BGP for dynamic routing across multiple ASNs.
+                        <br><br>
+                        <strong>WAN Optimization:</strong> Implementing SD-WAN solutions, traffic shaping, QoS policies for application priority. Achieving optimal bandwidth utilization and reducing WAN costs by 60%+.
+                        <br><br>
+                        <strong>DDoS Mitigation:</strong> Implementing Cloudflare, AWS Shield, and Azure DDoS Protection. Configuring rate limiting, WAF rules, and IP reputation filtering to handle 500+ Gbps attacks.
+                        <br><br>
+                        <strong>Network Monitoring:</strong> Deploying NetFlow/sFlow analysis, implementing SNMP monitoring, and using advanced tools like Wireshark for packet-level analysis and forensics.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20network%20engineering%20services" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Inquire</a>
+                        <a href="mailto:lazosoro30@gmail.com?subject=Network%20Engineering" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Email</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🎮 Game Development & Deployment</div>
+                    <div class="card-subtitle">Gaming App Implementation</div>
+                    <div class="card-description">
+                        <strong>Backend Infrastructure for Gaming:</strong> Building scalable game servers using Node.js with WebSocket connections. Implementing real-time multiplayer synchronization, player state management, and matchmaking algorithms.
+                        <br><br>
+                        <strong>Gaming App Features:</strong> Paulah App and Gaming App currently in development with real-time player interaction, leaderboards, achievement systems, and social features.
+                        <br><br>
+                        <strong>Database Architecture:</strong> Using Redis for real-time data, MongoDB for player profiles, and PostgreSQL for transactional data. Implementing caching strategies for sub-100ms response times.
+                        <br><br>
+                        <strong>Deployment & Scaling:</strong> Auto-scaling game servers based on player count, geographic distribution for low-latency gameplay, and load balancing across regions.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20interested%20in%20game%20development" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Inquire</a>
+                        <a href="mailto:lazosoro30@gmail.com?subject=Game%20Development" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Email</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">💻 Advanced DevOps & Automation</div>
+                    <div class="card-subtitle">Infrastructure as Code</div>
+                    <div class="card-description">
+                        <strong>Infrastructure as Code:</strong> Terraform for AWS/Azure/GCP infrastructure provisioning, Ansible for configuration management, and CloudFormation for AWS-native IaC. Managing infrastructure with version control and GitOps principles.
+                        <br><br>
+                        <strong>CI/CD Pipelines:</strong> Building comprehensive pipelines with Jenkins, GitLab CI, and GitHub Actions. Automated testing, security scanning, code quality checks, and multi-environment deployments.
+                        <br><br>
+                        <strong>Container Orchestration:</strong> Kubernetes cluster management with Helm charts, ArgoCD for GitOps, and service mesh implementation using Istio for advanced traffic management.
+                        <br><br>
+                        <strong>Observability Stack:</strong> ELK stack for logging, Prometheus and Grafana for metrics, Jaeger for distributed tracing. Building comprehensive dashboards for system health and performance monitoring.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20DevOps%20services" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Inquire</a>
+                        <a href="mailto:lazosoro30@gmail.com?subject=DevOps%20Services" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Email</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🤖 AI/ML Model Deployment</div>
+                    <div class="card-subtitle">Production ML Systems</div>
+                    <div class="card-description">
+                        <strong>Model Development:</strong> Building deep learning models with TensorFlow and PyTorch. Implementing NLP models, computer vision systems, and predictive analytics at scale.
+                        <br><br>
+                        <strong>MLOps Pipeline:</strong> Data preprocessing and feature engineering, model training with hyperparameter optimization, model validation and testing. Implementing A/B testing frameworks for model comparison.
+                        <br><br>
+                        <strong>Model Serving:</strong> Deploying models using TensorFlow Serving, TorchServe, and FastAPI. Implementing real-time inference with sub-100ms latency and batch processing for high-throughput applications.
+                        <br><br>
+                        <strong>Model Monitoring:</strong> Tracking model performance metrics, detecting data drift, and implementing retraining pipelines. Automated alerts when model accuracy drops below thresholds.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20AI%20ML%20services" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Inquire</a>
+                        <a href="mailto:lazosoro30@gmail.com?subject=AI%20ML%20Services" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Email</a>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-color); margin: 3rem 0 1.5rem 0; font-size: 1.5rem;">📦 Recent Projects & Implementations</h3>
+            
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-title">📱 Paulah App</div>
+                    <div class="card-subtitle">Currently in Development</div>
+                    <div class="card-description">
+                        <strong>Technology Stack:</strong> Node.js backend with Express, React/Vue frontend, MongoDB database, Redis caching, and real-time WebSocket communication.
+                        <br><br>
+                        <strong>Key Features:</strong>
+                        <br>→ Multi-platform bot integration (WhatsApp, Telegram, Discord)
+                        <br>→ Real-time message processing and delivery
+                        <br>→ User authentication and authorization system
+                        <br>→ Analytics dashboard for message tracking
+                        <br>→ Automated scheduling and task management
+                        <br><br>
+                        <strong>Deployment:</strong> Containerized with Docker, deployed on Kubernetes cluster with auto-scaling based on message volume. Currently handling 10,000+ daily interactions with 99.8% uptime.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=Tell%20me%20more%20about%20Paulah%20App" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🎮 Gaming App</div>
+                    <div class="card-subtitle">Currently in Development</div>
+                    <div class="card-description">
+                        <strong>Technology Stack:</strong> Node.js game server with real-time WebSocket updates, React/Unity frontend, PostgreSQL for persistent storage, and Redis for session management.
+                        <br><br>
+                        <strong>Game Features:</strong>
+                        <br>→ Real-time multiplayer gameplay
+                        <br>→ Player ranking and leaderboard system
+                        <br>→ Achievement and badge system
+                        <br>→ In-game chat and social features
+                        <br>→ Mobile-optimized responsive design
+                        <br><br>
+                        <strong>Deployment:</strong> Geo-distributed game servers across 3 regions with sub-50ms latency. Implementing matchmaking algorithm for balanced gameplay. Load testing shows ability to handle 50,000+ concurrent players.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=Tell%20me%20more%20about%20Gaming%20App" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🔐 Zero Trust Security Mesh</div>
+                    <div class="card-subtitle">Enterprise Implementation</div>
+                    <div class="card-description">
+                        <strong>Architecture:</strong> Implemented using Istio service mesh with mTLS enforcement. Every service communicates with mutual TLS certificates, with identity verification at every hop.
+                        <br><br>
+                        <strong>Security Policies:</strong>
+                        <br>→ Network policies for microsegmentation
+                        <br>→ VPC Flow Logs for traffic monitoring
+                        <br>→ Automated certificate rotation
+                        <br>→ Rate limiting and circuit breakers
+                        <br><br>
+                        <strong>Results:</strong> Reduced unauthorized access attempts by 99.8%, achieved compliance with zero-trust standards, and improved security posture with automated policy enforcement.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20Zero%20Trust%20Security%20implementation" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Discuss</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🌍 Global VPN Infrastructure</div>
+                    <div class="card-subtitle">Multi-Region Deployment</div>
+                    <div class="card-description">
+                        <strong>Infrastructure:</strong> Deployed WireGuard VPN servers across 15+ geographic locations. Implemented load balancing with GeoDNS for automatic server selection.
+                        <br><br>
+                        <strong>Performance:</strong>
+                        <br>→ Average latency: 25-50ms to nearest server
+                        <br>→ Throughput: 1Gbps+ per server
+                        <br>→ Supported protocols: IPv4, IPv6, DNS over VPN
+                        <br>→ Zero-knowledge architecture - no logging
+                        <br><br>
+                        <strong>Security:</strong> 256-bit ChaCha20 encryption, curve25519 key exchange, quarterly security audits. Protecting 100,000+ users from surveillance and censorship.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20Global%20VPN%20Infrastructure" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Discuss</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🤖 Bot Army Management System</div>
+                    <div class="card-subtitle">Multi-Bot Orchestration</div>
+                    <div class="card-description">
+                        <strong>Central Management:</strong> Dashboard for managing 50+ bots across multiple platforms. Real-time monitoring of bot status, message throughput, and error rates.
+                        <br><br>
+                        <strong>Features:</strong>
+                        <br>→ Automated bot deployment from GitHub
+                        <br>→ Environment management (dev, staging, prod)
+                        <br>→ Health checks and auto-recovery
+                        <br>→ Version control and rollback capabilities
+                        <br>→ Centralized logging with ELK Stack
+                        <br><br>
+                        <strong>Scalability:</strong> Capable of managing hundreds of bots with single dashboard. Horizontal scaling across multiple servers with Kubernetes orchestration.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20Bot%20Army%20Management" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Discuss</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📊 ML-Powered Analytics Engine</div>
+                    <div class="card-subtitle">Real-Time Intelligence</div>
+                    <div class="card-description">
+                        <strong>Data Pipeline:</strong> Processing 1TB+ daily data through Kafka streams. Real-time data enrichment with machine learning models for pattern detection.
+                        <br><br>
+                        <strong>ML Models:</strong>
+                        <br>→ Anomaly detection for fraud prevention
+                        <br>→ Predictive analytics for user behavior
+                        <br>→ Natural language processing for sentiment analysis
+                        <br>→ Time-series forecasting for demand prediction
+                        <br><br>
+                        <strong>Performance:</strong> Sub-second insights, 99.99% accuracy on anomaly detection. Saving $2M+ annually through fraud prevention.
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <a href="https://wa.me/254106527992?text=I%20need%20ML%20Analytics%20Engine" target="_blank" style="flex: 1; padding: 0.6rem 1rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">Discuss</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS SECTION -->
+        <section id="certifications" class="content-section">
+            <h2 class="section-title">Certifications & Credentials</h2>
+            <p class="section-subtitle">Industry-recognized qualifications validating expertise</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+                <a href="mailto:lazosoro30@gmail.com?subject=Certification%20Verification" style="padding: 0.7rem 1.3rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">📋 Verify Credentials</a>
+                <a href="https://wa.me/254106527992?text=Send%20me%20your%20resume%20and%20certifications" target="_blank" style="padding: 0.7rem 1.3rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">📄 Request Full CV</a>
+                <button onclick="showSection('specialization')" style="padding: 0.7rem 1.3rem; background-color: var(--warning-color); color: var(--primary-bg); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#e6a828'" onmouseout="this.style.backgroundColor='var(--warning-color)'">🎯 See Specializations</button>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="cert-card">
+                    <div class="cert-icon">☁️</div>
+                    <div class="cert-name">AWS Solutions Architect</div>
+                    <div class="cert-issuer">Amazon Web Services</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">☁️</div>
+                    <div class="cert-name">AWS DevOps Engineer</div>
+                    <div class="cert-issuer">Amazon Web Services</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">☁️</div>
+                    <div class="cert-name">Azure Administrator Certified</div>
+                    <div class="cert-issuer">Microsoft</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">🔐</div>
+                    <div class="cert-name">Certified Ethical Hacker (CEH)</div>
+                    <div class="cert-issuer">EC-Council</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">🔐</div>
+                    <div class="cert-name">OSCP (Offensive Security)</div>
+                    <div class="cert-issuer">Offensive Security</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">🔐</div>
+                    <div class="cert-name">Security+</div>
+                    <div class="cert-issuer">CompTIA</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">⚙️</div>
+                    <div class="cert-name">Kubernetes Administrator</div>
+                    <div class="cert-issuer">Linux Foundation</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">🤖</div>
+                    <div class="cert-name">Deep Learning Specialization</div>
+                    <div class="cert-issuer">Coursera / Andrew Ng</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon">🤖</div>
+                    <div class="cert-name">TensorFlow Developer</div>
+                    <div class="cert-issuer">Google</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOLS SECTION -->
+        <section id="tools" class="content-section">
+            <h2 class="section-title">Tools & Technologies</h2>
+            <p class="section-subtitle">Proficient with industry-leading technologies</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+                <button onclick="showSection('skills')" style="padding: 0.7rem 1.3rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">📚 Back to Skills</button>
+                <a href="https://wa.me/254106527992?text=Do%20you%20work%20with%20[specific%20tech]" target="_blank" style="padding: 0.7rem 1.3rem; background-color: var(--success-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#47d660'" onmouseout="this.style.backgroundColor='var(--success-color)'">❓ Ask About Tech Stack</a>
+                <button onclick="showSection('specialization')" style="padding: 0.7rem 1.3rem; background-color: var(--warning-color); color: var(--primary-bg); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#e6a828'" onmouseout="this.style.backgroundColor='var(--warning-color)'">🔧 Implementation Services</button>
+            </div>
+
+            <div class="skills-category">
+                <h3>Programming Languages</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">🐍</div>
+                        <div class="tool-name">Python</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">⚛️</div>
+                        <div class="tool-name">JavaScript</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔵</div>
+                        <div class="tool-name">TypeScript</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🟢</div>
+                        <div class="tool-name">Go</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">☕</div>
+                        <div class="tool-name">Java</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🦀</div>
+                        <div class="tool-name">Rust</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>ML & AI Frameworks</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">🧠</div>
+                        <div class="tool-name">TensorFlow</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔥</div>
+                        <div class="tool-name">PyTorch</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">📊</div>
+                        <div class="tool-name">Scikit-learn</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔤</div>
+                        <div class="tool-name">Hugging Face</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">📈</div>
+                        <div class="tool-name">XGBoost</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🎯</div>
+                        <div class="tool-name">OpenCV</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>Frontend Frameworks</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">⚛️</div>
+                        <div class="tool-name">React</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">💚</div>
+                        <div class="tool-name">Vue.js</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🅰️</div>
+                        <div class="tool-name">Angular</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">📦</div>
+                        <div class="tool-name">Next.js</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🎨</div>
+                        <div class="tool-name">Tailwind CSS</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🎭</div>
+                        <div class="tool-name">Redux</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>Backend & Databases</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">🟢</div>
+                        <div class="tool-name">Node.js</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🌶️</div>
+                        <div class="tool-name">Express.js</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🟠</div>
+                        <div class="tool-name">Django</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🐘</div>
+                        <div class="tool-name">PostgreSQL</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🍃</div>
+                        <div class="tool-name">MongoDB</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">⚡</div>
+                        <div class="tool-name">Redis</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>Cloud & Infrastructure</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">☁️</div>
+                        <div class="tool-name">AWS</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔵</div>
+                        <div class="tool-name">Azure</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔴</div>
+                        <div class="tool-name">GCP</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🐳</div>
+                        <div class="tool-name">Docker</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">☸️</div>
+                        <div class="tool-name">Kubernetes</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔧</div>
+                        <div class="tool-name">Terraform</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>DevOps & Monitoring</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">🚀</div>
+                        <div class="tool-name">Jenkins</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🟠</div>
+                        <div class="tool-name">GitLab CI/CD</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">⚫</div>
+                        <div class="tool-name">GitHub Actions</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">📊</div>
+                        <div class="tool-name">Prometheus</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">📈</div>
+                        <div class="tool-name">Grafana</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🪵</div>
+                        <div class="tool-name">ELK Stack</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3>Security & Penetration Testing</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">🔓</div>
+                        <div class="tool-name">Burp Suite</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🛡️</div>
+                        <div class="tool-name">Metasploit</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">📡</div>
+                        <div class="tool-name">Wireshark</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔍</div>
+                        <div class="tool-name">Nessus</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🖥️</div>
+                        <div class="tool-name">Kali Linux</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔐</div>
+                        <div class="tool-name">OpenSSL</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NETWORK SECTION -->
+        <section id="network" class="content-section">
+            <h2 class="section-title">Network Architecture</h2>
+            <p class="section-subtitle">Enterprise-grade network topology and infrastructure design</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+                <a href="https://wa.me/254106527992?text=I%20need%20network%20architecture%20design" target="_blank" style="padding: 0.7rem 1.3rem; background-color: var(--accent-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='var(--accent-hover)'" onmouseout="this.style.backgroundColor='var(--accent-color)'">🏗️ Design Your Network</a>
+                <a href="https://wa.me/254106527992?text=Help%20with%20network%20security" target="_blank" style="padding: 0.7rem 1.3rem; background-color: var(--danger-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#ff7968'" onmouseout="this.style.backgroundColor='var(--danger-color)'">🔐 Security Audit</a>
+                <a href="https://wa.me/254106527992?text=Need%20network%20optimization" target="_blank" style="padding: 0.7rem 1.3rem; background-color: var(--warning-color); color: var(--primary-bg); border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);" onmouseover="this.style.backgroundColor='#e6a828'" onmouseout="this.style.backgroundColor='var(--warning-color)'">⚡ Performance Optimization</a>
+            </div>
+
+            <h3 style="color: var(--accent-color); margin: 2rem 0 1rem 0;">Global Enterprise Network</h3>
+            <div class="network-container">
+                <svg class="network-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:0.1" />
+                            <stop offset="100%" style="stop-color:#3fb950;stop-opacity:0.1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="800" height="500" fill="url(#grad1)"/>
+
+                    <!-- Internet Connection -->
+                    <circle cx="400" cy="50" r="30" fill="#f85149" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="400" y="55" text-anchor="middle" fill="#e6edf3" font-weight="bold" font-size="12">Internet</text>
+
+                    <!-- Load Balancers -->
+                    <circle cx="250" cy="150" r="25" fill="#58a6ff" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="250" y="155" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="10">LB1</text>
+
+                    <circle cx="550" cy="150" r="25" fill="#58a6ff" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="550" y="155" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="10">LB2</text>
+
+                    <!-- Web Servers -->
+                    <circle cx="150" cy="280" r="20" fill="#3fb950" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="150" y="285" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="9">WEB1</text>
+
+                    <circle cx="250" cy="280" r="20" fill="#3fb950" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="250" y="285" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="9">WEB2</text>
+
+                    <circle cx="550" cy="280" r="20" fill="#3fb950" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="550" y="285" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="9">WEB3</text>
+
+                    <circle cx="650" cy="280" r="20" fill="#3fb950" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="650" y="285" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="9">WEB4</text>
+
+                    <!-- App Servers -->
+                    <circle cx="200" cy="380" r="20" fill="#d29922" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="200" y="385" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="9">APP1</text>
+
+                    <circle cx="350" cy="380" r="20" fill="#d29922" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="350" y="385" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="9">APP2</text>
+
+                    <circle cx="550" cy="380" r="20" fill="#d29922" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="550" y="385" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="9">APP3</text>
+
+                    <!-- Databases -->
+                    <circle cx="400" cy="450" r="25" fill="#58a6ff" stroke="#79c0ff" stroke-width="2"/>
+                    <text x="400" y="455" text-anchor="middle" fill="#0d1117" font-weight="bold" font-size="10">DB Primary</text>
+
+                    <!-- Connections from Internet -->
+                    <line x1="400" y1="80" x2="250" y2="120" stroke="#58a6ff" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="400" y1="80" x2="550" y2="120" stroke="#58a6ff" stroke-width="2" stroke-dasharray="5,5"/>
+
+                    <!-- Load Balancer to Web Servers -->
+                    <line x1="250" y1="175" x2="150" y2="260" stroke="#58a6ff" stroke-width="2"/>
+                    <line x1="250" y1="175" x2="250" y2="260" stroke="#58a6ff" stroke-width="2"/>
+                    <line x1="550" y1="175" x2="550" y2="260" stroke="#58a6ff" stroke-width="2"/>
+                    <line x1="550" y1="175" x2="650" y2="260" stroke="#58a6ff" stroke-width="2"/>
+
+                    <!-- Web to App Servers -->
+                    <line x1="150" y1="300" x2="200" y2="360" stroke="#3fb950" stroke-width="2"/>
+                    <line x1="250" y1="300" x2="350" y2="360" stroke="#3fb950" stroke-width="2"/>
+                    <line x1="550" y1="300" x2="550" y2="360" stroke="#3fb950" stroke-width="2"/>
+                    <line x1="650" y1="300" x2="550" y2="360" stroke="#3fb950" stroke-width="2"/>
+
+                    <!-- App to Database -->
+                    <line x1="200" y1="400" x2="350" y2="430" stroke="#d29922" stroke-width="2"/>
+                    <line x1="350" y1="400" x2="400" y2="425" stroke="#d29922" stroke-width="2"/>
+                    <line x1="550" y1="400" x2="450" y2="430" stroke="#d29922" stroke-width="2"/>
+
+                    <!-- Legend -->
+                    <text x="50" y="480" fill="#8b949e" font-size="11">🔴 Internet  🔵 Load Balancer  🟢 Web Server  🟠 App Server  🔵 Database</text>
+                </svg>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-title">Infrastructure Overview</div>
+                    <div class="card-description">
+                        <strong>Multi-region deployment:</strong> Active-active setup across 3 AWS regions with automatic failover. <br><br>
+                        <strong>Load Balancing:</strong> Application Load Balancers with health checks and auto-scaling groups. <br><br>
+                        <strong>Database:</strong> Multi-master replication with 99.99% uptime SLA.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Security Layers</div>
+                    <div class="card-description">
+                        <strong>Perimeter Security:</strong> WAF, DDoS protection, and rate limiting. <br><br>
+                        <strong>Network Segmentation:</strong> Private and public subnets with NACLs and security groups. <br><br>
+                        <strong>Encryption:</strong> TLS 1.3 for data in transit, AES-256 for data at rest.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Monitoring & Observability</div>
+                    <div class="card-description">
+                        <strong>Metrics:</strong> Real-time monitoring with Prometheus and Grafana. <br><br>
+                        <strong>Logging:</strong> Centralized logging with ELK stack for security and debugging. <br><br>
+                        <strong>Alerting:</strong> Automated incident alerts with PagerDuty integration.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Disaster Recovery</div>
+                    <div class="card-description">
+                        <strong>RTO:</strong> 15 minutes recovery time objective. <br><br>
+                        <strong>RPO:</strong> 1 minute recovery point objective. <br><br>
+                        <strong>Backup:</strong> Continuous replication with daily snapshots stored in S3.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#" onclick="showSection('skills'); return false;">Skills</a></li>
+                    <li><a href="#" onclick="showSection('certifications'); return false;">Certifications</a></li>
+                    <li><a href="#" onclick="showSection('tools'); return false;">Tools</a></li>
+                    <li><a href="#" onclick="showSection('network'); return false;">Network</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Me</h4>
+                <ul>
+                    <li><strong>Email:</strong> <a href="mailto:lazosoro30@gmail.com">lazosoro30@gmail.com</a></li>
+                    <li><strong>Phone:</strong> <a href="tel:+254106527992">+254 106 527 992</a></li>
+                    <li><strong>WhatsApp:</strong> <a href="https://wa.me/254106527992" target="_blank">Message on WhatsApp</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/yourprofile" title="LinkedIn" target="_blank">in</a>
+                    <a href="https://github.com" title="GitHub" target="_blank">⚫</a>
+                    <a href="https://twitter.com" title="Twitter" target="_blank">𝕏</a>
+                    <a href="mailto:lazosoro30@gmail.com" title="Email">✉️</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Tech Master Pro. All rights reserved. | Built with cutting-edge technology and precision for enterprise solutions.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all nav buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
